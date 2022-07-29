@@ -1,4 +1,7 @@
-*.sh            text eol=lf
-gradlew         text eol=lf
-mvnw            text eol=lf
-secret.txt      text eol=lf
+*.sh                    text eol=lf
+*.bat                   text eol=crlf
+gradlew                 text eol=lf
+mvnw                    text eol=lf
+secret.txt              text eol=lf
+CHANGELOG.md            text eol=lf
+CHANGELOG_zh-cn.md      text eol=lf

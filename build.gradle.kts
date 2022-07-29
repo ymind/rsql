@@ -3,9 +3,9 @@ import team.yi.gradle.plugin.FileSet
 
 object Constants {
     const val gitUrl = "github.com"
-    const val gitProjectUrl = "ymind/rsql-ktorm"
+    const val gitProjectUrl = "ymind/rsql"
 
-    const val projectVersion = "0.2.0-SNAPSHOT"
+    const val projectVersion = "0.84.0-SNAPSHOT"
 }
 
 plugins {
@@ -15,50 +15,64 @@ plugins {
 
     kotlin("jvm")
 
-    // https://plugins.gradle.org/plugin/org.jlleitschuh.gradle.ktlint
-    id("org.jlleitschuh.gradle.ktlint") version "9.4.1"
     // https://plugins.gradle.org/plugin/team.yi.semantic-gitlog
-    id("team.yi.semantic-gitlog") version "0.5.17"
+    id("team.yi.semantic-gitlog") version "0.6.12"
 
-    id("se.patrikerdes.use-latest-versions") version "0.2.15"
-    id("com.github.ben-manes.versions") version "0.36.0"
+    // https://plugins.gradle.org/plugin/se.patrikerdes.use-latest-versions
+    id("se.patrikerdes.use-latest-versions") version "0.2.18"
+    // https://plugins.gradle.org/plugin/com.github.ben-manes.versions
+    id("com.github.ben-manes.versions") version "0.51.0"
 
-    id("io.gitlab.arturbosch.detekt") version "1.15.0"
+    // https://plugins.gradle.org/plugin/io.gitlab.arturbosch.detekt
+    id("io.gitlab.arturbosch.detekt") version "1.23.5"
 }
 
 group = "team.yi.rsql"
 version = Constants.projectVersion
 description = "Integration RSQL query language and Querydsl framework."
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-
-    withJavadocJar()
-    withSourcesJar()
-}
-
 subprojects {
     apply(plugin = "maven-publish")
     apply(plugin = "signing")
-    apply(plugin = "java-library")
-    apply(plugin = "kotlin")
 
     version = rootProject.version
 
+    if (project.name == "rsql-bom" || project.name == "rsql-deps") return@subprojects
+
+    apply(plugin = "java-library")
+    apply(plugin = "kotlin")
+
     dependencies {
+        api(platform(project(":rsql-deps")))
+
         implementation(kotlin("stdlib-jdk8"))
         implementation("org.jetbrains.kotlin:kotlin-reflect")
 
-        testImplementation(platform("org.junit:junit-bom:5.7.1"))
-        testImplementation("org.junit.jupiter:junit-jupiter")
-        testImplementation("cn.hutool:hutool-all:5.5.8")
-        testImplementation("org.apache.logging.log4j:log4j-slf4j-impl:2.14.0")
+        testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+
+        // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
+        testImplementation("ch.qos.logback:logback-classic")
+    }
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+
+        withJavadocJar()
+        withSourcesJar()
+
+        val mainSourceSet = sourceSets.getByName(SourceSet.MAIN_SOURCE_SET_NAME)
+
+        registerFeature("provider") {
+            usingSourceSet(mainSourceSet)
+        }
     }
 
     tasks {
         val kotlinSettings: KotlinCompile.() -> Unit = {
-            kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
+            kotlinOptions.apiVersion = "1.9"
+            kotlinOptions.languageVersion = "1.9"
+            kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
             kotlinOptions.freeCompilerArgs += listOf(
                 "-Xjsr305=strict"
             )
@@ -76,53 +90,25 @@ subprojects {
 }
 
 allprojects {
-    apply(plugin = "org.jlleitschuh.gradle.ktlint")
     apply(plugin = "com.github.ben-manes.versions")
     apply(plugin = "se.patrikerdes.use-latest-versions")
     apply(plugin = "io.gitlab.arturbosch.detekt")
 
-    ktlint {
-        debug.set(false)
-        outputToConsole.set(true)
-        outputColorName.set("RED")
-        ignoreFailures.set(false)
-        enableExperimentalRules.set(true)
-
-        filter {
-            exclude("**/generated/**")
-            include("**/kotlin/**")
-        }
-    }
-
     detekt {
-        failFast = true
-        buildUponDefaultConfig = false
-        config = files("$rootDir/config/detekt/detekt.yml")
+        buildUponDefaultConfig = true
+        allRules = true
+        autoCorrect = true
+        config.from(files("$rootDir/config/detekt/detekt.yml"))
         baseline = file("$rootDir/config/detekt/baseline.xml")
-
-        reports {
-            html.enabled = true
-            xml.enabled = true
-            txt.enabled = true
-        }
     }
 
     repositories {
         mavenLocal()
-        jcenter()
         mavenCentral()
-
-        // maven {
-        //     setUrl("https://maven.aliyun.com/repository/public")
-        // }
     }
 
-    java {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-
-        withJavadocJar()
-        withSourcesJar()
+    dependencies {
+        detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:${detekt.toolVersion}")
     }
 
     if (project == rootProject) return@allprojects
@@ -132,14 +118,18 @@ allprojects {
     publishing {
         publications {
             register("mavenJava", MavenPublication::class) {
-                from(components["java"])
+                if (project.name == "rsql-bom" || project.name == "rsql-deps") {
+                    from(components["javaPlatform"])
+                } else {
+                    from(components["java"])
 
-                versionMapping {
-                    usage("java-api") {
-                        fromResolutionOf("runtimeClasspath")
-                    }
-                    usage("java-runtime") {
-                        fromResolutionResult()
+                    versionMapping {
+                        usage("java-api") {
+                            fromResolutionOf("runtimeClasspath")
+                        }
+                        usage("java-runtime") {
+                            fromResolutionResult()
+                        }
                     }
                 }
 
@@ -195,13 +185,13 @@ allprojects {
         repositories {
             maven {
                 val releasesRepoUrl = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2")
-                val snapshotsRepoUrl = uri("https://oss.sonatype.org/content/repositories/snapshots")
+                val snapshotsRepoUrl = uri("https://ymind-maven.pkg.coding.net/repository/kmoo/public/")
 
                 url = if (version.toString().endsWith("SNAPSHOT", true)) snapshotsRepoUrl else releasesRepoUrl
 
                 credentials {
-                    username = System.getenv("OSSRH_USERNAME") ?: "${properties["OSSRH_USERNAME"]}"
-                    password = System.getenv("OSSRH_TOKEN") ?: "${properties["OSSRH_TOKEN"]}"
+                    username = System.getenv("OSSRH_USERNAME") ?: "${properties["CODING_KMOO_USERNAME"]}"
+                    password = System.getenv("OSSRH_TOKEN") ?: "${properties["CODING_KMOO_TOKEN"]}"
                 }
             }
         }
@@ -219,14 +209,6 @@ allprojects {
 }
 
 tasks {
-    ktlintFormat {
-        outputs.upToDateWhen { false }
-    }
-
-    ktlintCheck {
-        outputs.upToDateWhen { false }
-    }
-
     val gitlogFileSets = setOf(
         FileSet(
             file("${rootProject.rootDir}/config/gitlog/CHANGELOG.md.mustache"),

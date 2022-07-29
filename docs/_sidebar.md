@@ -1,3 +1,0 @@
-- [Overview](/en-us/)
-- **Getting started**
-    - [Quick start](/en-us/quickstart)

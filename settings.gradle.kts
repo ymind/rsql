@@ -1,16 +1,17 @@
 pluginManagement {
-    val kotlinPluginVersion = "1.4.30"
+    val kotlinVersion: String by settings
 
     plugins {
-        kotlin("jvm") version kotlinPluginVersion
+        kotlin("jvm") version kotlinVersion
     }
 }
 
-rootProject.name = "rsql-ktorm"
+rootProject.name = "rsql"
 
-include("rsql-ktorm")
-include("rsql-ktorm-mysql")
-include("rsql-ktorm-oracle")
-include("rsql-ktorm-postgresql")
-include("rsql-ktorm-sqlite")
-include("rsql-ktorm-sqlserver")
+include("rsql-bom", "rsql-deps")
+
+include("rsql")
+include("rsql-core")
+include("rsql-provider-zeko", "rsql-provider-jooq", "rsql-provider-mybatis-flex")
+
+include("kt-ascii-table")
