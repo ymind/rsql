@@ -1,18 +1,17 @@
 package team.yi.rsql.mybatisflex
 
 import com.mybatisflex.core.query.*
+import team.yi.rsql.*
 
 object MybatisFlexRsqlUtil {
-    fun toValue(argument: String, typePrompt: String?, quote: Boolean = false): QueryColumn {
-        val quoted = if (quote) {
-            "'$argument'"
-        } else {
-            argument
-        }
+    fun toValue(argument: String, typePrompt: String?): QueryColumn {
+        val quoted = argument.sqlEscape()
 
         return when (typePrompt) {
-            "raw" -> RawQueryColumn(quoted)
-            "num" -> ArithmeticQueryColumn(argument)
+            RsqlTypeConstants.RAW -> RawQueryColumn(quoted)
+            RsqlTypeConstants.NUMBER -> ArithmeticQueryColumn(argument)
+            RsqlTypeConstants.BOOLEAN -> RawQueryColumn(argument.toBoolean())
+            RsqlTypeConstants.DATE, RsqlTypeConstants.TIME, RsqlTypeConstants.DATETIME -> RawQueryColumn(quoted)
             else -> RawQueryColumn(quoted)
         }
     }

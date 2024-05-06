@@ -35,6 +35,7 @@ logs/
 pom.xml.versionsBackup
 
 ### CUSTOM CONFIG ###
+.fastRequest
 .gradle
 .okhttpcache
 secret.gpg

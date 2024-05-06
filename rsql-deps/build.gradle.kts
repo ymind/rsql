@@ -11,24 +11,24 @@ javaPlatform {
 
 dependencies {
     // https://mvnrepository.com/artifact/com.fasterxml.jackson/jackson-bom
-    api(platform("com.fasterxml.jackson:jackson-bom:2.17.0"))
+    api(platform("com.fasterxml.jackson:jackson-bom:2.17.1"))
     // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-bom
     api(platform("org.apache.logging.log4j:log4j-bom:3.0.0-beta2"))
     // https://mvnrepository.com/artifact/org.jooq/jooq-parent
-    api(platform("org.jooq:jooq-parent:3.19.6"))
+    api(platform("org.jooq:jooq-parent:3.19.8"))
     // https://mvnrepository.com/artifact/com.mybatis-flex/mybatis-flex-dependencies
-    api(platform("com.mybatis-flex:mybatis-flex-dependencies:1.8.2"))
+    api(platform("com.mybatis-flex:mybatis-flex-dependencies:1.8.8"))
 
     constraints {
         // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
-        api("ch.qos.logback:logback-classic:1.5.3")
+        api("ch.qos.logback:logback-classic:1.5.6")
 
         // https://mvnrepository.com/artifact/io.github.nstdio/rsql-parser
-        api("io.github.nstdio:rsql-parser:2.2.1")
+        api("io.github.nstdio:rsql-parser:2.3.2")
         // https://mvnrepository.com/artifact/io.github.oshai/kotlin-logging-jvm
-        api("io.github.oshai:kotlin-logging-jvm:6.0.3")
+        api("io.github.oshai:kotlin-logging-jvm:6.0.9")
         // https://mvnrepository.com/artifact/io.zeko/zeko-sql-builder
-        api("io.zeko:zeko-sql-builder:1.4.0")
+        api("io.zeko:zeko-sql-builder:1.5.5")
         // https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-jdk8
         api("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.8.0")
 

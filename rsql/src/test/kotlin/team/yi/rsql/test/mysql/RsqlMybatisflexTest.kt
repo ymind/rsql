@@ -1,8 +1,7 @@
 package team.yi.rsql.test.mysql
 
 import com.mybatisflex.core.MybatisFlexBootstrap
-import com.mybatisflex.core.query.QueryWrapper
-import com.mybatisflex.core.table.TableDef
+import com.mybatisflex.core.query.*
 import com.zaxxer.hikari.HikariDataSource
 import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlinx.coroutines.runBlocking
@@ -116,7 +115,7 @@ class RsqlMybatisflexTest : BaseMySqlTest() {
 
         query.select("d.LOCATION 地址")
 
-        val dTable = TableDef("t_department")
+        val dTable = QueryTable("t_department")
 
         query.leftJoin<QueryWrapper>(dTable).`as`("d").on("e.DEPARTMENT_ID = d.ID")
 

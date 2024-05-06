@@ -1,7 +1,6 @@
 package team.yi.rsql.test.h2
 
 import com.mybatisflex.core.query.*
-import com.mybatisflex.core.table.TableDef
 import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
@@ -81,8 +80,8 @@ class MybatisFlexTest : H2BaseTest() {
         val params = rsqlQuery.queryParts.filter { !it.useRawValue }.map { it.parameters }.toMutableList()
         val query = rsqlQuery.resultQuery
 
-        val tableEmployee = TableDef("T_EMPLOYEE").`as`("e")
-        val tableDepartment = TableDef("T_DEPARTMENT")
+        val tableEmployee = QueryTable("T_EMPLOYEE").`as`("e")
+        val tableDepartment = QueryTable("T_DEPARTMENT")
 
         query.leftJoin<QueryWrapper>(tableDepartment).`as`("d")
             .on(

@@ -6,7 +6,9 @@ import team.yi.rsql.core.*
 object RsqlUtil {
     fun getOperators(customOperators: Collection<RsqlOperator>? = null): Set<ComparisonOperator> {
         val operators = Operator.entries
-            .map { ComparisonOperator(it.symbols, it.multiValue) }
+            .map {
+                ComparisonOperator(it.symbols, it.arity)
+            }
             .toMutableSet()
 
         if (customOperators.isNullOrEmpty()) return operators
@@ -14,7 +16,7 @@ object RsqlUtil {
         customOperators.forEach { operator ->
             operator.symbols.mapTo(operators) {
                 runCatching {
-                    ComparisonOperator(it, operator.multiValue)
+                    ComparisonOperator(it, operator.arity)
                 }.onFailure { ex ->
                     throw IllegalArgumentException("Invalid operator symbol: '$it' Operator ${ex.message}", ex)
                 }.getOrThrow()
@@ -23,8 +25,6 @@ object RsqlUtil {
 
         return operators
     }
-
-    const val TYPE_PROMPT_DELIMITER = "@"
 }
 
 fun String.sqlEscape(): String = this.replace("'", "''")

@@ -17,7 +17,7 @@ class RsqlVisitor<R>(
     override fun visit(node: ComparisonNode?, param: RsqlExpression<R>?): RsqlExpression<R>? {
         if (node?.operator == null) return null
 
-        val rsqlOperator = RsqlOperator(*node.operator.symbols, multiValue = node.operator.isMultiValue)
+        val rsqlOperator = RsqlOperator(*node.operator.symbols, arity = node.operator.arity)
 
         return rsqlBuilder.visit(node.selector, node.arguments, rsqlOperator)
     }

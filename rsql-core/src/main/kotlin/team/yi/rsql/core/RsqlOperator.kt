@@ -1,10 +1,11 @@
 package team.yi.rsql.core
 
+import cz.jirutka.rsql.parser.ast.Arity
 import java.io.*
 
 class RsqlOperator(
     vararg val symbols: String,
-    val multiValue: Boolean,
+    val arity: Arity,
 ) : Serializable {
     val symbol: String = symbols[0]
 
@@ -21,7 +22,7 @@ class RsqlOperator(
     }
 
     override fun toString(): String {
-        return "symbols: [${symbols.joinToString()}], multiValue: $multiValue"
+        return "symbols: [${symbols.joinToString()}], arity: $arity"
     }
 
     private fun Array<out String>.equalsTo(symbols: Array<out String>): Boolean {
@@ -35,7 +36,7 @@ class RsqlOperator(
         private const val serialVersionUID = 1L
 
         fun from(operator: Operator): RsqlOperator {
-            return RsqlOperator(*operator.symbols, multiValue = operator.multiValue)
+            return RsqlOperator(*operator.symbols, arity = operator.arity)
         }
     }
 }

@@ -41,7 +41,7 @@ abstract class RsqlProvider<Q, C, R>(
                 appendLine("  comparison operators:")
 
                 config.comparisonOperators.forEach {
-                    appendLine("  - ${it.symbols.joinToString()}: ${it.isMultiValue}")
+                    appendLine("  - ${it.symbols.joinToString()}: [${it.arity.min()}, ${it.arity.max()}]")
                 }
             }
         }
