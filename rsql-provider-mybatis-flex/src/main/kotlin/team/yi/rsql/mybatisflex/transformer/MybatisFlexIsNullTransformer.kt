@@ -1,9 +1,9 @@
 package team.yi.rsql.mybatisflex.transformer
 
 import com.mybatisflex.core.query.*
-import team.yi.rsql.core.RsqlQueryPart
+import team.yi.rsql.core.*
 
-class MybatisFlexIsNullTransformer : MybatisFlexRsqlTransformer() {
+class MybatisFlexIsNullTransformer : MybatisFlexRsqlTransformer(Operator.IS_NULL) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryCondition> {
         val field = RawQueryColumn(selector)
         val queryBlock = field.isNull
@@ -12,7 +12,7 @@ class MybatisFlexIsNullTransformer : MybatisFlexRsqlTransformer() {
     }
 }
 
-class MybatisFlexIsNotNullTransformer : MybatisFlexRsqlTransformer() {
+class MybatisFlexIsNotNullTransformer : MybatisFlexRsqlTransformer(Operator.IS_NOT_NULL) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryCondition> {
         val field = RawQueryColumn(selector)
         val queryBlock = field.isNotNull

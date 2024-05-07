@@ -2,10 +2,10 @@ package team.yi.rsql.jooq.transformer
 
 import org.jooq.QueryPart
 import org.jooq.impl.DSL
-import team.yi.rsql.core.RsqlQueryPart
+import team.yi.rsql.core.*
 import team.yi.rsql.jooq.JooqRsqlUtil
 
-class JooqEqualsTransformer : JooqRsqlTransformer() {
+class JooqEqualsTransformer : JooqRsqlTransformer(Operator.EQUALS) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryPart> {
         val field = DSL.field(selector)
         val value1 = JooqRsqlUtil.toValue(arguments[0], typePrompt)
@@ -15,7 +15,7 @@ class JooqEqualsTransformer : JooqRsqlTransformer() {
     }
 }
 
-class JooqNotEqualsTransformer : JooqRsqlTransformer() {
+class JooqNotEqualsTransformer : JooqRsqlTransformer(Operator.NOT_EQUALS) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryPart> {
         val field = DSL.field(selector)
         val value1 = JooqRsqlUtil.toValue(arguments[0], typePrompt)
@@ -25,7 +25,7 @@ class JooqNotEqualsTransformer : JooqRsqlTransformer() {
     }
 }
 
-class JooqEqualsIgnoreCaseTransformer : JooqRsqlTransformer() {
+class JooqEqualsIgnoreCaseTransformer : JooqRsqlTransformer(Operator.EQUALS_IGNORE_CASE) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryPart> {
         val field = DSL.field(selector)
         val value1 = DSL.value(arguments[0])
@@ -35,7 +35,7 @@ class JooqEqualsIgnoreCaseTransformer : JooqRsqlTransformer() {
     }
 }
 
-class JooqNotEqualsIgnoreCaseTransformer : JooqRsqlTransformer() {
+class JooqNotEqualsIgnoreCaseTransformer : JooqRsqlTransformer(Operator.NOT_EQUALS_IGNORE_CASE) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryPart> {
         val field = DSL.field(selector)
         val value1 = DSL.value(arguments[0])

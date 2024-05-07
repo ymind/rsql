@@ -6,7 +6,7 @@ enum class Operator(
     vararg val symbols: String,
     val arity: Arity = Arity.nary(1),
 ) {
-    IS_NULL("=isNull="),
+    IS_NULL("=null=", "=isNull="),
     IS_NOT_NULL("=isNotNull=", "=notNull="),
 
     IN("=in=", arity = Arity.of(1, Int.MAX_VALUE)),
@@ -15,8 +15,8 @@ enum class Operator(
     EQUALS("==", "=eq="),
     NOT_EQUALS("!=", "=ne="),
 
-    IS_TRUE("=isTrue="),
-    IS_FALSE("=isFalse="),
+    IS_TRUE("=is=", "=isTrue="),
+    IS_FALSE("=notIs=", "=isFalse="),
 
     IS_EMPTY("=isEmpty=", "=empty="),
     IS_NOT_EMPTY("=isNotEmpty=", "=notEmpty="),

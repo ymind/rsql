@@ -1,17 +1,17 @@
 package team.yi.rsql.mybatisflex.transformer
 
 import com.mybatisflex.core.query.*
-import team.yi.rsql.core.RsqlQueryPart
-import team.yi.rsql.mybatisflex.MybatisFlexRsqlUtil
+import team.yi.rsql.*
+import team.yi.rsql.core.*
 
-class MybatisFlexInTransformer(private val useRawValue: Boolean) : MybatisFlexRsqlTransformer() {
+class MybatisFlexInTransformer(private val useRawValue: Boolean) : MybatisFlexRsqlTransformer(Operator.IN) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryCondition> {
         val field = RawQueryColumn(selector)
         val values = arguments.map {
-            if (typePrompt == "b" || typePrompt == "bool") {
+            if (RsqlConstants.TYPE_PROMPT_BOOLEAN == typePrompt) {
                 it.toBoolean()
             } else {
-                MybatisFlexRsqlUtil.toValue(it, typePrompt)
+                it.sqlEscape()
             }
         }
         val queryBlock = field.`in`(*values.toTypedArray())
@@ -20,14 +20,14 @@ class MybatisFlexInTransformer(private val useRawValue: Boolean) : MybatisFlexRs
     }
 }
 
-class MybatisFlexNotInTransformer(private val useRawValue: Boolean) : MybatisFlexRsqlTransformer() {
+class MybatisFlexNotInTransformer(private val useRawValue: Boolean) : MybatisFlexRsqlTransformer(Operator.NOT_IN) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryCondition> {
         val field = RawQueryColumn(selector)
         val values = arguments.map {
-            if (typePrompt == "b" || typePrompt == "bool") {
+            if (RsqlConstants.TYPE_PROMPT_BOOLEAN == typePrompt) {
                 it.toBoolean()
             } else {
-                MybatisFlexRsqlUtil.toValue(it, typePrompt)
+                it.sqlEscape()
             }
         }
         val queryBlock = field.notIn(*values.toTypedArray())

@@ -2,10 +2,10 @@ package team.yi.rsql.zeko.transformer
 
 import io.zeko.db.sql.QueryBlock
 import io.zeko.db.sql.operators.*
-import team.yi.rsql.core.RsqlQueryPart
+import team.yi.rsql.core.*
 import team.yi.rsql.zeko.*
 
-class ZekoLikeTransformer(private val useRawValue: Boolean) : ZekoRsqlTransformer() {
+class ZekoLikeTransformer(private val useRawValue: Boolean) : ZekoRsqlTransformer(Operator.LIKE) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryBlock> {
         val value1 = arguments[0]
         val queryBlock = like(selector, value1, useRawValue)
@@ -14,7 +14,7 @@ class ZekoLikeTransformer(private val useRawValue: Boolean) : ZekoRsqlTransforme
     }
 }
 
-class ZekoLikeIgnoreCaseTransformer(private val useRawValue: Boolean) : ZekoRsqlTransformer() {
+class ZekoLikeIgnoreCaseTransformer(private val useRawValue: Boolean) : ZekoRsqlTransformer(Operator.LIKE_IGNORE_CASE) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryBlock> {
         val value1 = arguments[0]
         val queryBlock = likeIC(selector, value1, useRawValue)
@@ -23,7 +23,7 @@ class ZekoLikeIgnoreCaseTransformer(private val useRawValue: Boolean) : ZekoRsql
     }
 }
 
-class ZekoNotLikeTransformer(private val useRawValue: Boolean) : ZekoRsqlTransformer() {
+class ZekoNotLikeTransformer(private val useRawValue: Boolean) : ZekoRsqlTransformer(Operator.NOT_LIKE) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryBlock> {
         val value1 = arguments[0]
         val queryBlock = notLike(selector, value1, useRawValue)
@@ -32,7 +32,7 @@ class ZekoNotLikeTransformer(private val useRawValue: Boolean) : ZekoRsqlTransfo
     }
 }
 
-class ZekoStartsWithTransformer(private val useRawValue: Boolean) : ZekoRsqlTransformer() {
+class ZekoStartsWithTransformer(private val useRawValue: Boolean) : ZekoRsqlTransformer(Operator.STARTS_WITH) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryBlock> {
         val value1 = arguments[0]
         val queryBlock = startsWith(selector, value1, useRawValue)
@@ -41,7 +41,7 @@ class ZekoStartsWithTransformer(private val useRawValue: Boolean) : ZekoRsqlTran
     }
 }
 
-class ZekoStartsWithIgnoreCaseTransformer(private val useRawValue: Boolean) : ZekoRsqlTransformer() {
+class ZekoStartsWithIgnoreCaseTransformer(private val useRawValue: Boolean) : ZekoRsqlTransformer(Operator.STARTS_WITH_IGNORE_CASE) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryBlock> {
         val value1 = arguments[0]
         val queryBlock = startsWithIC(selector, value1, useRawValue)
@@ -50,7 +50,7 @@ class ZekoStartsWithIgnoreCaseTransformer(private val useRawValue: Boolean) : Ze
     }
 }
 
-class ZekoEndsWithTransformer(private val useRawValue: Boolean) : ZekoRsqlTransformer() {
+class ZekoEndsWithTransformer(private val useRawValue: Boolean) : ZekoRsqlTransformer(Operator.ENDS_WITH) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryBlock> {
         val value1 = arguments[0]
         val queryBlock = endsWith(selector, value1, useRawValue)
@@ -59,7 +59,7 @@ class ZekoEndsWithTransformer(private val useRawValue: Boolean) : ZekoRsqlTransf
     }
 }
 
-class ZekoEndsWithIgnoreCaseTransformer(private val useRawValue: Boolean) : ZekoRsqlTransformer() {
+class ZekoEndsWithIgnoreCaseTransformer(private val useRawValue: Boolean) : ZekoRsqlTransformer(Operator.ENDS_WITH_IGNORE_CASE) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryBlock> {
         val value1 = arguments[0]
         val queryBlock = endsWithIC(selector, value1, useRawValue)
@@ -68,7 +68,7 @@ class ZekoEndsWithIgnoreCaseTransformer(private val useRawValue: Boolean) : Zeko
     }
 }
 
-class ZekoContainsTransformer(private val useRawValue: Boolean) : ZekoRsqlTransformer() {
+class ZekoContainsTransformer(private val useRawValue: Boolean) : ZekoRsqlTransformer(Operator.CONTAINS) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryBlock> {
         val value1 = arguments[0]
         val queryBlock = contains(selector, value1, useRawValue)
@@ -77,7 +77,7 @@ class ZekoContainsTransformer(private val useRawValue: Boolean) : ZekoRsqlTransf
     }
 }
 
-class ZekoContainsIgnoreCaseTransformer(private val useRawValue: Boolean) : ZekoRsqlTransformer() {
+class ZekoContainsIgnoreCaseTransformer(private val useRawValue: Boolean) : ZekoRsqlTransformer(Operator.CONTAINS_IGNORE_CASE) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryBlock> {
         val value1 = arguments[0]
         val queryBlock = containsIC(selector, value1, useRawValue)

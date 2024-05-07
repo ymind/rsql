@@ -2,10 +2,10 @@ package team.yi.rsql.jooq.transformer
 
 import org.jooq.QueryPart
 import org.jooq.impl.DSL
-import team.yi.rsql.core.RsqlQueryPart
+import team.yi.rsql.core.*
 import team.yi.rsql.jooq.JooqRsqlUtil
 
-class JooqInTransformer : JooqRsqlTransformer() {
+class JooqInTransformer : JooqRsqlTransformer(Operator.IN) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryPart> {
         val field = DSL.field(selector)
         val values = arguments.map { JooqRsqlUtil.toValue(it, typePrompt) }
@@ -15,7 +15,7 @@ class JooqInTransformer : JooqRsqlTransformer() {
     }
 }
 
-class JooqNotInTransformer : JooqRsqlTransformer() {
+class JooqNotInTransformer : JooqRsqlTransformer(Operator.NOT_IN) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryPart> {
         val field = DSL.field(selector)
         val values = arguments.map { JooqRsqlUtil.toValue(it, typePrompt) }

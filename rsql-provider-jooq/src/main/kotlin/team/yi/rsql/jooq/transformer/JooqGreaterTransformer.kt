@@ -2,10 +2,10 @@ package team.yi.rsql.jooq.transformer
 
 import org.jooq.QueryPart
 import org.jooq.impl.DSL
-import team.yi.rsql.core.RsqlQueryPart
+import team.yi.rsql.core.*
 import team.yi.rsql.jooq.JooqRsqlUtil
 
-class JooqGreaterTransformer : JooqRsqlTransformer() {
+class JooqGreaterTransformer : JooqRsqlTransformer(Operator.GREATER_THAN) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryPart> {
         val field = DSL.field(selector)
         val value1 = JooqRsqlUtil.toValue(arguments[0], typePrompt)
@@ -15,7 +15,7 @@ class JooqGreaterTransformer : JooqRsqlTransformer() {
     }
 }
 
-class JooqGreaterEqualsTransformer : JooqRsqlTransformer() {
+class JooqGreaterEqualsTransformer : JooqRsqlTransformer(Operator.GREATER_THAN_OR_EQUALS) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryPart> {
         val field = DSL.field(selector)
         val value1 = JooqRsqlUtil.toValue(arguments[0], typePrompt)
@@ -25,7 +25,7 @@ class JooqGreaterEqualsTransformer : JooqRsqlTransformer() {
     }
 }
 
-class JooqLessTransformer : JooqRsqlTransformer() {
+class JooqLessTransformer : JooqRsqlTransformer(Operator.LESS_THAN) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryPart> {
         val field = DSL.field(selector)
         val value1 = JooqRsqlUtil.toValue(arguments[0], typePrompt)
@@ -35,7 +35,7 @@ class JooqLessTransformer : JooqRsqlTransformer() {
     }
 }
 
-class JooqLessEqualsTransformer : JooqRsqlTransformer() {
+class JooqLessEqualsTransformer : JooqRsqlTransformer(Operator.LESS_THAN_OR_EQUALS) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryPart> {
         val field = DSL.field(selector)
         val value1 = JooqRsqlUtil.toValue(arguments[0], typePrompt)
@@ -45,7 +45,7 @@ class JooqLessEqualsTransformer : JooqRsqlTransformer() {
     }
 }
 
-class JooqBetweenTransformer : JooqRsqlTransformer() {
+class JooqBetweenTransformer : JooqRsqlTransformer(Operator.BETWEEN) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryPart> {
         val field = DSL.field(selector)
         val value1 = JooqRsqlUtil.toValue(arguments[0], typePrompt)
@@ -56,7 +56,7 @@ class JooqBetweenTransformer : JooqRsqlTransformer() {
     }
 }
 
-class JooqNotBetweenTransformer : JooqRsqlTransformer() {
+class JooqNotBetweenTransformer : JooqRsqlTransformer(Operator.NOT_BETWEEN) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryPart> {
         val field = DSL.field(selector)
         val value1 = JooqRsqlUtil.toValue(arguments[0], typePrompt)
@@ -67,7 +67,7 @@ class JooqNotBetweenTransformer : JooqRsqlTransformer() {
     }
 }
 
-class JooqBeforeTransformer : JooqRsqlTransformer() {
+class JooqBeforeTransformer : JooqRsqlTransformer(Operator.BEFORE) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryPart> {
         val field = DSL.field(selector)
         val value1 = JooqRsqlUtil.toValue(arguments[0], typePrompt)
@@ -77,7 +77,7 @@ class JooqBeforeTransformer : JooqRsqlTransformer() {
     }
 }
 
-class JooqAfterTransformer : JooqRsqlTransformer() {
+class JooqAfterTransformer : JooqRsqlTransformer(Operator.AFTER) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryPart> {
         val field = DSL.field(selector)
         val value1 = JooqRsqlUtil.toValue(arguments[0], typePrompt)

@@ -7,14 +7,15 @@ import team.yi.rsql.mybatisflex.transformer.MybatisFlexRsqlTransformer
 
 abstract class MybatisFlexAggregationTransformer(
     private val sqlAggregation: SqlAggregation,
-    private val operator: SqlOperator,
-) : MybatisFlexRsqlTransformer() {
+    private val aggOperator: SqlOperator,
+    override val operator: Operator,
+) : MybatisFlexRsqlTransformer(operator) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryCondition> {
         val field = RawQueryColumn(selector)
         val value1 = arguments[0]
         val queryBlock = QueryCondition.create(
             FunctionQueryColumn(sqlAggregation.functionName, field),
-            operator,
+            aggOperator,
             value1,
         )
 

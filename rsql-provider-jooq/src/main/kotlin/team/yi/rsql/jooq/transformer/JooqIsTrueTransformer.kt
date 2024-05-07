@@ -2,9 +2,9 @@ package team.yi.rsql.jooq.transformer
 
 import org.jooq.QueryPart
 import org.jooq.impl.DSL
-import team.yi.rsql.core.RsqlQueryPart
+import team.yi.rsql.core.*
 
-class JooqIsTrueTransformer : JooqRsqlTransformer() {
+class JooqIsTrueTransformer : JooqRsqlTransformer(Operator.IS_TRUE) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryPart> {
         val field = DSL.field(selector)
         val value1 = DSL.value(true)
@@ -14,7 +14,7 @@ class JooqIsTrueTransformer : JooqRsqlTransformer() {
     }
 }
 
-class JooqIsFalseTransformer : JooqRsqlTransformer() {
+class JooqIsFalseTransformer : JooqRsqlTransformer(Operator.IS_FALSE) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryPart> {
         val field = DSL.field(selector)
         val value1 = DSL.value(false)

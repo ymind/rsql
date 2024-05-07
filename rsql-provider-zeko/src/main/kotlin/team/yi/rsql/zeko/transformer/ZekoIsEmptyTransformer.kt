@@ -1,10 +1,10 @@
 package team.yi.rsql.zeko.transformer
 
 import io.zeko.db.sql.QueryBlock
-import team.yi.rsql.core.RsqlQueryPart
+import team.yi.rsql.core.*
 import team.yi.rsql.zeko.*
 
-class ZekoIsEmptyTransformer : ZekoRsqlTransformer() {
+class ZekoIsEmptyTransformer : ZekoRsqlTransformer(Operator.IS_EMPTY) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryBlock> {
         val queryBlock = isEmpty(selector)
 
@@ -12,7 +12,7 @@ class ZekoIsEmptyTransformer : ZekoRsqlTransformer() {
     }
 }
 
-class ZekoIsNotEmptyTransformer : ZekoRsqlTransformer() {
+class ZekoIsNotEmptyTransformer : ZekoRsqlTransformer(Operator.IS_NOT_EMPTY) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryBlock> {
         val queryBlock = isNotEmpty(selector)
 

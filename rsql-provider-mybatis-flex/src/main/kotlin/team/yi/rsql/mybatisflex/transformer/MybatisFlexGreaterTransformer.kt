@@ -1,10 +1,10 @@
 package team.yi.rsql.mybatisflex.transformer
 
 import com.mybatisflex.core.query.*
-import team.yi.rsql.core.RsqlQueryPart
+import team.yi.rsql.core.*
 import team.yi.rsql.mybatisflex.MybatisFlexRsqlUtil
 
-class MybatisFlexGreaterTransformer : MybatisFlexRsqlTransformer() {
+class MybatisFlexGreaterTransformer : MybatisFlexRsqlTransformer(Operator.GREATER_THAN) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryCondition> {
         val field = RawQueryColumn(selector)
         val value1 = MybatisFlexRsqlUtil.toValue(arguments[0], typePrompt)
@@ -14,7 +14,7 @@ class MybatisFlexGreaterTransformer : MybatisFlexRsqlTransformer() {
     }
 }
 
-class MybatisFlexGreaterEqualsTransformer : MybatisFlexRsqlTransformer() {
+class MybatisFlexGreaterEqualsTransformer : MybatisFlexRsqlTransformer(Operator.GREATER_THAN_OR_EQUALS) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryCondition> {
         val field = RawQueryColumn(selector)
         val value1 = MybatisFlexRsqlUtil.toValue(arguments[0], typePrompt)
@@ -24,7 +24,7 @@ class MybatisFlexGreaterEqualsTransformer : MybatisFlexRsqlTransformer() {
     }
 }
 
-class MybatisFlexLessTransformer : MybatisFlexRsqlTransformer() {
+class MybatisFlexLessTransformer : MybatisFlexRsqlTransformer(Operator.LESS_THAN) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryCondition> {
         val field = RawQueryColumn(selector)
         val value1 = MybatisFlexRsqlUtil.toValue(arguments[0], typePrompt)
@@ -34,7 +34,7 @@ class MybatisFlexLessTransformer : MybatisFlexRsqlTransformer() {
     }
 }
 
-class MybatisFlexLessEqualsTransformer : MybatisFlexRsqlTransformer() {
+class MybatisFlexLessEqualsTransformer : MybatisFlexRsqlTransformer(Operator.LESS_THAN_OR_EQUALS) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryCondition> {
         val field = RawQueryColumn(selector)
         val value1 = MybatisFlexRsqlUtil.toValue(arguments[0], typePrompt)
@@ -44,7 +44,7 @@ class MybatisFlexLessEqualsTransformer : MybatisFlexRsqlTransformer() {
     }
 }
 
-class MybatisFlexBetweenTransformer(private val useRawValue: Boolean) : MybatisFlexRsqlTransformer() {
+class MybatisFlexBetweenTransformer(private val useRawValue: Boolean) : MybatisFlexRsqlTransformer(Operator.BETWEEN) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryCondition> {
         val field = RawQueryColumn(selector)
         val value1 = MybatisFlexRsqlUtil.toValue(arguments[0], typePrompt)
@@ -55,7 +55,7 @@ class MybatisFlexBetweenTransformer(private val useRawValue: Boolean) : MybatisF
     }
 }
 
-class MybatisFlexNotBetweenTransformer(private val useRawValue: Boolean) : MybatisFlexRsqlTransformer() {
+class MybatisFlexNotBetweenTransformer(private val useRawValue: Boolean) : MybatisFlexRsqlTransformer(Operator.NOT_BETWEEN) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryCondition> {
         val field = RawQueryColumn(selector)
         val value1 = MybatisFlexRsqlUtil.toValue(arguments[0], typePrompt)
@@ -66,20 +66,20 @@ class MybatisFlexNotBetweenTransformer(private val useRawValue: Boolean) : Mybat
     }
 }
 
-class MybatisFlexBeforeTransformer : MybatisFlexRsqlTransformer() {
+class MybatisFlexBeforeTransformer : MybatisFlexRsqlTransformer(Operator.BEFORE) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryCondition> {
         val field = RawQueryColumn(selector)
-        val value1 = MybatisFlexRsqlUtil.toValue(arguments[0], "dt")
+        val value1 = MybatisFlexRsqlUtil.toValue(arguments[0], typePrompt, true)
         val queryBlock = field.lt(value1)
 
         return RsqlQueryPart(selector, arguments, queryBlock, true, value1)
     }
 }
 
-class MybatisFlexAfterTransformer : MybatisFlexRsqlTransformer() {
+class MybatisFlexAfterTransformer : MybatisFlexRsqlTransformer(Operator.AFTER) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryCondition> {
         val field = RawQueryColumn(selector)
-        val value1 = MybatisFlexRsqlUtil.toValue(arguments[0], "dt")
+        val value1 = MybatisFlexRsqlUtil.toValue(arguments[0], typePrompt, true)
         val queryBlock = field.gt(value1)
 
         return RsqlQueryPart(selector, arguments, queryBlock, true, value1)

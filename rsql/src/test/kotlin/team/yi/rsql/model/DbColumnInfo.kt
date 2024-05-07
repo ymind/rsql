@@ -1,13 +1,13 @@
 package team.yi.rsql.model
 
 class DbColumnInfo(
-    var catalogName: String,
+    val catalogName: String,
     val schemaName: String,
-    var tableName: String,
+    val tableName: String,
     val columnName: String,
     val columnLabel: String,
-    var columnType: Int,
-    var columnTypeName: String,
+    val columnType: Int,
+    val columnTypeName: String,
 ) {
     var isAutoIncrement: Boolean = false
     var isCaseSensitive: Boolean = false

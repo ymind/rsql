@@ -2,9 +2,9 @@ package team.yi.rsql.zeko.transformer
 
 import io.zeko.db.sql.QueryBlock
 import io.zeko.db.sql.operators.regexp
-import team.yi.rsql.core.RsqlQueryPart
+import team.yi.rsql.core.*
 
-class ZekoRegexpTransformer : ZekoRsqlTransformer() {
+class ZekoRegexpTransformer : ZekoRsqlTransformer(Operator.REGEX) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryBlock> {
         val value1 = arguments[0]
         val queryBlock = regexp(selector, value1)

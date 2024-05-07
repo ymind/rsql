@@ -2,10 +2,10 @@ package team.yi.rsql.zeko.transformer
 
 import io.zeko.db.sql.QueryBlock
 import io.zeko.db.sql.operators.*
-import team.yi.rsql.core.RsqlQueryPart
+import team.yi.rsql.core.*
 import team.yi.rsql.zeko.*
 
-class ZekoGreaterTransformer : ZekoRsqlTransformer() {
+class ZekoGreaterTransformer : ZekoRsqlTransformer(Operator.GREATER_THAN) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryBlock> {
         val value1 = arguments[0]
         val queryBlock = greater(selector, value1)
@@ -14,7 +14,7 @@ class ZekoGreaterTransformer : ZekoRsqlTransformer() {
     }
 }
 
-class ZekoGreaterEqualsTransformer : ZekoRsqlTransformer() {
+class ZekoGreaterEqualsTransformer : ZekoRsqlTransformer(Operator.GREATER_THAN_OR_EQUALS) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryBlock> {
         val value1 = arguments[0]
         val queryBlock = greaterEq(selector, value1)
@@ -23,7 +23,7 @@ class ZekoGreaterEqualsTransformer : ZekoRsqlTransformer() {
     }
 }
 
-class ZekoLessTransformer : ZekoRsqlTransformer() {
+class ZekoLessTransformer : ZekoRsqlTransformer(Operator.LESS_THAN) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryBlock> {
         val value1 = arguments[0]
         val queryBlock = less(selector, value1)
@@ -32,7 +32,7 @@ class ZekoLessTransformer : ZekoRsqlTransformer() {
     }
 }
 
-class ZekoLessEqualsTransformer : ZekoRsqlTransformer() {
+class ZekoLessEqualsTransformer : ZekoRsqlTransformer(Operator.LESS_THAN_OR_EQUALS) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryBlock> {
         val value1 = arguments[0]
         val queryBlock = lessEq(selector, value1)
@@ -41,7 +41,7 @@ class ZekoLessEqualsTransformer : ZekoRsqlTransformer() {
     }
 }
 
-class ZekoBetweenTransformer(private val useRawValue: Boolean) : ZekoRsqlTransformer() {
+class ZekoBetweenTransformer(private val useRawValue: Boolean) : ZekoRsqlTransformer(Operator.BETWEEN) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryBlock> {
         val value1 = arguments[0]
         val value2 = arguments[1]
@@ -51,7 +51,7 @@ class ZekoBetweenTransformer(private val useRawValue: Boolean) : ZekoRsqlTransfo
     }
 }
 
-class ZekoNotBetweenTransformer(private val useRawValue: Boolean) : ZekoRsqlTransformer() {
+class ZekoNotBetweenTransformer(private val useRawValue: Boolean) : ZekoRsqlTransformer(Operator.NOT_BETWEEN) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryBlock> {
         val value1 = arguments[0]
         val value2 = arguments[1]
@@ -61,7 +61,7 @@ class ZekoNotBetweenTransformer(private val useRawValue: Boolean) : ZekoRsqlTran
     }
 }
 
-class ZekoBeforeTransformer : ZekoRsqlTransformer() {
+class ZekoBeforeTransformer : ZekoRsqlTransformer(Operator.BEFORE) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryBlock> {
         val value1 = arguments[0]
         val queryBlock = before(selector, value1)
@@ -70,7 +70,7 @@ class ZekoBeforeTransformer : ZekoRsqlTransformer() {
     }
 }
 
-class ZekoAfterTransformer : ZekoRsqlTransformer() {
+class ZekoAfterTransformer : ZekoRsqlTransformer(Operator.AFTER) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryBlock> {
         val value1 = arguments[0]
         val queryBlock = after(selector, value1)

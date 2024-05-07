@@ -1,10 +1,10 @@
 package team.yi.rsql.mybatisflex.transformer
 
 import com.mybatisflex.core.query.*
-import team.yi.rsql.core.RsqlQueryPart
+import team.yi.rsql.core.*
 import team.yi.rsql.sqlEscape
 
-class MybatisFlexEqualsTransformer : MybatisFlexRsqlTransformer() {
+class MybatisFlexEqualsTransformer : MybatisFlexRsqlTransformer(Operator.EQUALS) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryCondition> {
         val field = RawQueryColumn(selector)
         val value1 = arguments[0].sqlEscape()
@@ -14,7 +14,7 @@ class MybatisFlexEqualsTransformer : MybatisFlexRsqlTransformer() {
     }
 }
 
-class MybatisFlexNotEqualsTransformer : MybatisFlexRsqlTransformer() {
+class MybatisFlexNotEqualsTransformer : MybatisFlexRsqlTransformer(Operator.NOT_EQUALS) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryCondition> {
         val field = RawQueryColumn(selector)
         val value1 = arguments[0].sqlEscape()
@@ -24,7 +24,7 @@ class MybatisFlexNotEqualsTransformer : MybatisFlexRsqlTransformer() {
     }
 }
 
-class MybatisFlexEqualsIgnoreCaseTransformer : MybatisFlexRsqlTransformer() {
+class MybatisFlexEqualsIgnoreCaseTransformer : MybatisFlexRsqlTransformer(Operator.EQUALS_IGNORE_CASE) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryCondition> {
         val field = QueryMethods.upper(RawQueryColumn(selector))
         val value1 = QueryMethods.upper(arguments[0].sqlEscape())
@@ -34,7 +34,7 @@ class MybatisFlexEqualsIgnoreCaseTransformer : MybatisFlexRsqlTransformer() {
     }
 }
 
-class MybatisFlexNotEqualsIgnoreCaseTransformer : MybatisFlexRsqlTransformer() {
+class MybatisFlexNotEqualsIgnoreCaseTransformer : MybatisFlexRsqlTransformer(Operator.NOT_EQUALS_IGNORE_CASE) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryCondition> {
         val field = QueryMethods.upper(RawQueryColumn(selector))
         val value1 = QueryMethods.upper(arguments[0].sqlEscape())

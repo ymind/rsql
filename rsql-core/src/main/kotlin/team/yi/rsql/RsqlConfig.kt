@@ -1,7 +1,7 @@
 package team.yi.rsql
 
 import cz.jirutka.rsql.parser.ast.ComparisonOperator
-import team.yi.rsql.core.*
+import team.yi.rsql.core.RsqlOperator
 
 open class RsqlConfig<R> {
     private val transformersMap = mutableMapOf<String, RsqlTransformer<R>>()
@@ -20,21 +20,17 @@ open class RsqlConfig<R> {
         this.operators.add(operator)
     }
 
-    fun register(transformer: RsqlTransformer<R>, vararg symbols: String) {
-        symbols.distinct().forEach {
-            transformersMap.putIfAbsent(it, transformer)
-        }
-    }
-
     fun register(transformer: RsqlTransformer<R>, symbol: String) {
         transformersMap.putIfAbsent(symbol, transformer)
     }
 
-    fun register(transformer: RsqlTransformer<R>, operator: Operator) {
-        register(transformer, *operator.symbols)
+    fun register(transformer: RsqlTransformer<R>) {
+        register(transformer, transformer.operator.symbols)
     }
 
-    fun register(transformer: RsqlTransformer<R>, operator: RsqlOperator) {
-        register(transformer, *operator.symbols)
+    fun register(transformer: RsqlTransformer<R>, symbols: Array<out String>) {
+        symbols.distinct().forEach {
+            register(transformer, it)
+        }
     }
 }

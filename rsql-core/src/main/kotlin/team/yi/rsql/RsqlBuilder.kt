@@ -20,7 +20,7 @@ class RsqlBuilder<R>(
         val fieldPath = if (typePrompt == null) {
             selector
         } else {
-            selector.substringBefore(RsqlTypeConstants.TYPE_PROMPT_DELIMITER)
+            selector.substringBefore(RsqlConstants.TYPE_PROMPT_DELIMITER)
         }
 
         visitCallback.beforeTransform(fieldPath, arguments, rsqlOperator)
@@ -46,7 +46,7 @@ class RsqlBuilder<R>(
     }
 
     private fun detectTypePrompt(selector: String): String? {
-        return selector.indexOf(RsqlTypeConstants.TYPE_PROMPT_DELIMITER).let { index ->
+        return selector.indexOf(RsqlConstants.TYPE_PROMPT_DELIMITER).let { index ->
             if (index > 0) {
                 selector.substring(index + 1).trim().ifEmpty { null }
             } else {
