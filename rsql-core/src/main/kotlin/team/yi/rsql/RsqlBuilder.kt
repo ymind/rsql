@@ -23,8 +23,6 @@ class RsqlBuilder<R>(
             selector.substringBefore(RsqlConstants.TYPE_PROMPT_DELIMITER)
         }
 
-        visitCallback.beforeTransform(fieldPath, arguments, rsqlOperator)
-
         val transformer = transformers.getValue(rsqlOperator.symbol)
         val result = transformer.transform(fieldPath, arguments, typePrompt)
 

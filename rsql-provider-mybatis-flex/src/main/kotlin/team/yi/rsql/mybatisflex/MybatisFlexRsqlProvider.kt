@@ -58,10 +58,10 @@ class MybatisFlexRsqlProvider(
         }
 
         input.orderBy?.forEach {
-            val expr = it.substringBefore(' ').trim()
-            val order = it.substringAfter(expr).trim()
+            val expr = it.substringBeforeLast(' ').trim()
+            val order = it.substringAfterLast(' ').trim().firstOrNull() ?: 'a'
 
-            if (order.startsWith('D') || order.startsWith('d')) {
+            if (order == 'D' || order == 'd') {
                 queryWrapper.orderBy(expr, false)
             } else {
                 queryWrapper.orderBy(expr, true)

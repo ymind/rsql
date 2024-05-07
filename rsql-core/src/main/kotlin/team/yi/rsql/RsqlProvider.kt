@@ -2,7 +2,7 @@ package team.yi.rsql
 
 import cz.jirutka.rsql.parser.RSQLParser
 import io.github.oshai.kotlinlogging.KotlinLogging
-import team.yi.rsql.core.*
+import team.yi.rsql.core.RsqlVisitCallback
 
 abstract class RsqlProvider<Q, C, R>(
     private val config: RsqlConfig<R>,
@@ -19,12 +19,11 @@ abstract class RsqlProvider<Q, C, R>(
         }
 
         val rsqlBuilder = RsqlBuilder(config.transformers, visitCallback)
-        val visitor = RsqlVisitor(rsqlBuilder)
+        val visitor = RsqlVisitor(rsqlBuilder, config.rsqlNodeValidator)
 
         val rootNode = RSQLParser(config.comparisonOperators).parse(rsql)
-        val predicate: RsqlExpression<R>? = rootNode.accept(visitor)
 
-        return predicate?.value
+        return rootNode.accept(visitor)?.value
     }
 
     init {

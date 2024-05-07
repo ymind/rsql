@@ -1,7 +1,7 @@
 package team.yi.rsql
 
 import cz.jirutka.rsql.parser.ast.ComparisonOperator
-import team.yi.rsql.core.RsqlOperator
+import team.yi.rsql.core.*
 
 open class RsqlConfig<R> {
     private val transformersMap = mutableMapOf<String, RsqlTransformer<R>>()
@@ -11,6 +11,8 @@ open class RsqlConfig<R> {
 
     val transformers: Map<String, RsqlTransformer<R>>
         get() = transformersMap
+
+    var rsqlNodeValidator: RsqlNodeValidator? = null
 
     fun register(vararg operators: RsqlOperator) {
         this.operators.addAll(operators)
