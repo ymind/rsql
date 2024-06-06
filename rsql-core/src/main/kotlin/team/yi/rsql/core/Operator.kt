@@ -2,98 +2,101 @@ package team.yi.rsql.core
 
 import cz.jirutka.rsql.parser.ast.Arity
 
-enum class Operator(
-    vararg val symbols: String,
-    val arity: Arity = Arity.nary(1),
+data class Operator(
+    val symbols: List<String>,
+    val arity: Arity,
 ) {
-    IS_NULL("=null=", "=isNull="),
-    IS_NOT_NULL("=isNotNull=", "=notNull="),
+    constructor(
+        vararg symbols: String,
+        arity: Arity = Arity.nary(1),
+    ) : this(symbols.toList(), arity)
 
-    IN("=in=", arity = Arity.of(1, Int.MAX_VALUE)),
-    NOT_IN("=notIn=", "=out=", arity = Arity.of(1, Int.MAX_VALUE)),
+    init {
+        symbols.forEach { symbol ->
+            lookup[symbol] = this
+        }
 
-    EQUALS("==", "=eq="),
-    NOT_EQUALS("!=", "=ne="),
-
-    IS_TRUE("=is=", "=isTrue="),
-    IS_FALSE("=notIs=", "=isFalse="),
-
-    IS_EMPTY("=isEmpty=", "=empty="),
-    IS_NOT_EMPTY("=isNotEmpty=", "=notEmpty="),
-
-    EQUALS_IGNORE_CASE("=equalsIgnoreCase=", "=eqic="),
-    NOT_EQUALS_IGNORE_CASE("=notEqualsIgnoreCase=", "=neqic="),
-
-    LIKE("=like="),
-    LIKE_IGNORE_CASE("=likeIgnoreCase=", "=likeic="),
-    NOT_LIKE("=notLike="),
-
-    REGEX("=regex="),
-
-    STARTS_WITH("=startsWith="),
-    STARTS_WITH_IGNORE_CASE("=startsWithIgnoreCase="),
-    ENDS_WITH("=endsWith="),
-    ENDS_WITH_IGNORE_CASE("=endsWithIgnoreCase="),
-    CONTAINS("=con=", "=contains="),
-    CONTAINS_IGNORE_CASE("=containsIgnoreCase=", "=conic="),
-
-    BETWEEN("=between=", arity = Arity.nary(2)),
-    NOT_BETWEEN("=notBetween=", arity = Arity.nary(2)),
-
-    GREATER_THAN(">", "=gt=", "=greater="),
-    GREATER_THAN_OR_EQUALS(">=", "=goe=", "=ge="),
-
-    LESS_THAN("<", "=lt="),
-    LESS_THAN_OR_EQUALS("<=", "=loe=", "=le="),
-
-    BEFORE("=before="),
-    AFTER("=after="),
-
-    // aggregations
-    AVG_EQ("=avgEq="),
-    AVG_GT("=avgGt="),
-    AVG_LT("=avgLt="),
-    AVG_GE("=avgGe="),
-    AVG_LE("=avgLe="),
-
-    COUNT_EQ("=countEq="),
-    COUNT_GT("=countGt="),
-    COUNT_LT("=countLt="),
-    COUNT_GE("=countGe="),
-    COUNT_LE("=countLe="),
-
-    MAX_EQ("=maxEq="),
-    MAX_GT("=maxGt="),
-    MAX_LT("=maxLt="),
-    MAX_GE("=maxGe="),
-    MAX_LE("=maxLe="),
-
-    MIN_EQ("=minEq="),
-    MIN_GT("=minGt="),
-    MIN_LT("=minLt="),
-    MIN_GE("=minGe="),
-    MIN_LE("=minLe="),
-
-    SUM_EQ("=sumEq="),
-    SUM_GT("=sumGt="),
-    SUM_LT("=sumLt="),
-    SUM_GE("=sumGe="),
-    SUM_LE("=sumLe="),
-
-    // end
-    ;
+        entries.add(this)
+    }
 
     companion object {
+        val entries = mutableSetOf<Operator>()
         val lookup = mutableMapOf<String, Operator>()
 
         operator fun get(operator: String): Operator? = lookup[operator]
 
-        init {
-            entries.forEach {
-                it.symbols.forEach { symbol ->
-                    lookup[symbol] = it
-                }
-            }
-        }
+        val IS_NULL = Operator("=null=", "=isNull=")
+        val IS_NOT_NULL = Operator("=isNotNull=", "=notNull=")
+
+        val IN = Operator("=in=", arity = Arity.of(1, Int.MAX_VALUE))
+        val NOT_IN = Operator("=notIn=", "=out=", arity = Arity.of(1, Int.MAX_VALUE))
+
+        val EQUALS = Operator("==", "=eq=")
+        val NOT_EQUALS = Operator("!=", "=ne=")
+
+        val IS_TRUE = Operator("=is=", "=isTrue=")
+        val IS_FALSE = Operator("=notIs=", "=isFalse=")
+
+        val IS_EMPTY = Operator("=isEmpty=", "=empty=")
+        val IS_NOT_EMPTY = Operator("=isNotEmpty=", "=notEmpty=")
+
+        val EQUALS_IGNORE_CASE = Operator("=equalsIgnoreCase=", "=eqic=")
+        val NOT_EQUALS_IGNORE_CASE = Operator("=notEqualsIgnoreCase=", "=neqic=")
+
+        val LIKE = Operator("=like=")
+        val LIKE_IGNORE_CASE = Operator("=likeIgnoreCase=", "=likeic=")
+        val NOT_LIKE = Operator("=notLike=")
+
+        val REGEX = Operator("=regex=")
+
+        val STARTS_WITH = Operator("=startsWith=")
+        val STARTS_WITH_IGNORE_CASE = Operator("=startsWithIgnoreCase=")
+        val ENDS_WITH = Operator("=endsWith=")
+        val ENDS_WITH_IGNORE_CASE = Operator("=endsWithIgnoreCase=")
+        val CONTAINS = Operator("=con=", "=contains=")
+        val CONTAINS_IGNORE_CASE = Operator("=containsIgnoreCase=", "=conic=")
+
+        val BETWEEN = Operator("=between=", arity = Arity.nary(2))
+        val NOT_BETWEEN = Operator("=notBetween=", arity = Arity.nary(2))
+
+        val GREATER_THAN = Operator(">", "=gt=", "=greater=")
+        val GREATER_THAN_OR_EQUALS = Operator(">=", "=goe=", "=ge=")
+
+        val LESS_THAN = Operator("<", "=lt=")
+        val LESS_THAN_OR_EQUALS = Operator("<=", "=loe=", "=le=")
+
+        val BEFORE = Operator("=before=")
+        val AFTER = Operator("=after=")
+
+        // aggregations
+        val AVG_EQ = Operator("=avgEq=")
+        val AVG_GT = Operator("=avgGt=")
+        val AVG_LT = Operator("=avgLt=")
+        val AVG_GE = Operator("=avgGe=")
+        val AVG_LE = Operator("=avgLe=")
+
+        val COUNT_EQ = Operator("=countEq=")
+        val COUNT_GT = Operator("=countGt=")
+        val COUNT_LT = Operator("=countLt=")
+        val COUNT_GE = Operator("=countGe=")
+        val COUNT_LE = Operator("=countLe=")
+
+        val MAX_EQ = Operator("=maxEq=")
+        val MAX_GT = Operator("=maxGt=")
+        val MAX_LT = Operator("=maxLt=")
+        val MAX_GE = Operator("=maxGe=")
+        val MAX_LE = Operator("=maxLe=")
+
+        val MIN_EQ = Operator("=minEq=")
+        val MIN_GT = Operator("=minGt=")
+        val MIN_LT = Operator("=minLt=")
+        val MIN_GE = Operator("=minGe=")
+        val MIN_LE = Operator("=minLe=")
+
+        val SUM_EQ = Operator("=sumEq=")
+        val SUM_GT = Operator("=sumGt=")
+        val SUM_LT = Operator("=sumLt=")
+        val SUM_GE = Operator("=sumGe=")
+        val SUM_LE = Operator("=sumLe=")
     }
 }

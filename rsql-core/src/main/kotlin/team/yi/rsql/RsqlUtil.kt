@@ -7,7 +7,7 @@ object RsqlUtil {
     fun getOperators(customOperators: Collection<RsqlOperator>? = null): Set<ComparisonOperator> {
         val operators = Operator.entries
             .map {
-                ComparisonOperator(it.symbols, it.arity)
+                ComparisonOperator(it.symbols.toTypedArray(), it.arity)
             }
             .toMutableSet()
 

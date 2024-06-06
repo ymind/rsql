@@ -30,7 +30,7 @@ open class RsqlConfig<R> {
         register(transformer, transformer.operator.symbols)
     }
 
-    fun register(transformer: RsqlTransformer<R>, symbols: Array<out String>) {
+    fun register(transformer: RsqlTransformer<R>, symbols: List<String>) {
         symbols.distinct().forEach {
             register(transformer, it)
         }

@@ -26,7 +26,7 @@ class RsqlVisitor<R>(
 
         if (rsqlNode == null) return null
 
-        val rsqlOperator = RsqlOperator(*rsqlNode.operator.symbols, arity = rsqlNode.operator.arity)
+        val rsqlOperator = RsqlOperator(rsqlNode.operator.symbols.toList(), arity = rsqlNode.operator.arity)
 
         return rsqlBuilder.visit(rsqlNode.selector, rsqlNode.arguments, rsqlOperator)
     }
