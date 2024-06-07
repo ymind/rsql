@@ -1,5 +1,6 @@
 package team.yi.rsql
 
+import cz.jirutka.rsql.parser.ast.ComparisonNode
 import io.github.oshai.kotlinlogging.KotlinLogging
 import team.yi.rsql.core.*
 
@@ -9,7 +10,10 @@ class RsqlBuilder<R>(
 ) {
     private val kLogger = KotlinLogging.logger {}
 
-    fun visit(selector: String, arguments: List<String>, rsqlOperator: RsqlOperator): RsqlExpression<R>? {
+    fun visit(rsqlNode: ComparisonNode, rsqlOperator: RsqlOperator): RsqlExpression<R>? {
+        val selector = rsqlNode.selector
+        val arguments = rsqlNode.arguments
+
         if (selector.isBlank()) {
             kLogger.trace { "selector of node is blank, skip.)" }
 
@@ -24,7 +28,16 @@ class RsqlBuilder<R>(
         }
 
         val transformer = transformers.getValue(rsqlOperator.symbol)
-        val result = transformer.transform(fieldPath, arguments, typePrompt)
+
+        val result = synchronized(transformer) {
+            if (!transformer.supports(rsqlNode, rsqlOperator)) {
+                kLogger.trace { "not support this transformer(${transformer.javaClass.name})." }
+
+                return null
+            }
+
+            transformer.transform(fieldPath, arguments, typePrompt)
+        }
 
         if (result == null) {
             kLogger.trace { "rsql node transform failed." }

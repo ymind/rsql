@@ -3,7 +3,6 @@ plugins {
 }
 
 group = "team.yi.rsql"
-version = "0.2.0-SNAPSHOT"
 
 repositories {
     mavenCentral()

@@ -1,6 +1,6 @@
 # 更新日志
 
-## 0.89.0-SNAPSHOT (2024-05-07)
+## 0.90.0-SNAPSHOT (2024-06-06)
 
 ### Features
 
@@ -93,11 +93,9 @@
 - support jooq 0.84.0-SNAPSHOT ([0a0ef0be](https://github.com/ymind/rsql/commit/0a0ef0be0b089358a84967e493594303b822aa54))
 - support jooq 0.84.0-SNAPSHOT ([940665c0](https://github.com/ymind/rsql/commit/940665c0b785806eca448ce19347afa761c61299))
 
-
 ### Chores
 
 - **deps**: bumped package versions ([603832a9](https://github.com/ymind/rsql/commit/603832a9ef57f790a5a7cfcd73e74b2a10fda11e))
-
 
 ### Build System
 

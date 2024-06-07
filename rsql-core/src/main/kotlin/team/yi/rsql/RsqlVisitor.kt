@@ -28,7 +28,7 @@ class RsqlVisitor<R>(
 
         val rsqlOperator = RsqlOperator(rsqlNode.operator.symbols.toList(), arity = rsqlNode.operator.arity)
 
-        return rsqlBuilder.visit(rsqlNode.selector, rsqlNode.arguments, rsqlOperator)
+        return rsqlBuilder.visit(rsqlNode, rsqlOperator)
     }
 
     private fun logicalExpression(node: LogicalNode?, param: RsqlExpression<R>?, logicalType: LogicalType): RsqlExpression<R>? {
