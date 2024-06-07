@@ -5,7 +5,7 @@ object Constants {
     const val gitUrl = "github.com"
     const val gitProjectUrl = "ymind/rsql"
 
-    const val projectVersion = "0.90.0-SNAPSHOT"
+    const val projectVersion = "0.92.0-SNAPSHOT"
 }
 
 plugins {

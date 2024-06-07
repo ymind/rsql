@@ -1,103 +1,32 @@
 # 更新日志
 
-## 0.90.0-SNAPSHOT (2024-06-06)
+## 0.92.0-SNAPSHOT (2024-06-07)
 
 ### Features
 
-- support zeko ([4202c89c](https://github.com/ymind/rsql/commit/4202c89c11b0a77951c84de10f974970ec12c777))
-- support zeko ([12f7d9de](https://github.com/ymind/rsql/commit/12f7d9dec223ea872711aa42dab34e3dc059e717))
-- support zeko ([b41bbc73](https://github.com/ymind/rsql/commit/b41bbc7355fe381e5bddb90f36eb17f774a0a5e6))
-- support zeko ([7fec287b](https://github.com/ymind/rsql/commit/7fec287b0055cbc30c5f5a10feac985bfbb87441))
-- support zeko ([44c385b6](https://github.com/ymind/rsql/commit/44c385b665c320865f20ba84951fd3fc2beff75f))
-- support zeko ([c55cdf39](https://github.com/ymind/rsql/commit/c55cdf391fa0be0c5dc83756a65ef17c5ffbae34))
-- support zeko ([6fcb25c7](https://github.com/ymind/rsql/commit/6fcb25c7748a4fdf03574c7072981ee8b9d581e3))
-- support zeko ([8e171e1e](https://github.com/ymind/rsql/commit/8e171e1e5ac5499e2afc27be519396f3a163e5f9))
-- support zeko ([10be7293](https://github.com/ymind/rsql/commit/10be7293b16e862b28bb091bfcb89dea06ba64d6))
-- support zeko ([b586ab9c](https://github.com/ymind/rsql/commit/b586ab9ced7c7ef3fc08bfb2255c92126e6ad828))
-- support zeko ([57baaba4](https://github.com/ymind/rsql/commit/57baaba4ae45e4f2adc85ea9a85be63caa8825a3))
-- support zeko ([813a38fb](https://github.com/ymind/rsql/commit/813a38fbaa7f58f88f599127893489b9dfeda062))
-- support zeko ([1f764d87](https://github.com/ymind/rsql/commit/1f764d871b6714f9a17498f51a8bb0df634e75aa))
-- support zeko ([6f487a3c](https://github.com/ymind/rsql/commit/6f487a3c9fed766f994c43dd170bbe890496bd02))
-- support zeko ([5dd862fd](https://github.com/ymind/rsql/commit/5dd862fd2ca59245b4e22e9ef5521869a10d8e7d))
-- support zeko ([5bfd0761](https://github.com/ymind/rsql/commit/5bfd0761c047030c4b9ab992cffa68d1f1695c18))
-- support zeko ([3af7b9f1](https://github.com/ymind/rsql/commit/3af7b9f124563fc6bdac6147040fc4fa93ca0b57))
-- support zeko ([a5798756](https://github.com/ymind/rsql/commit/a5798756f5284f229a391c95af12b2c2c9968bf5))
-- support zeko ([a91c67ac](https://github.com/ymind/rsql/commit/a91c67ac7382364a878a322ca8b81417b71b6334))
-- support zeko ([92880eb8](https://github.com/ymind/rsql/commit/92880eb8cc289a6c3c4d7842eb7d1b733923810a))
-- support zeko ([fd57c62f](https://github.com/ymind/rsql/commit/fd57c62f63220223e7c013ddf42c7bcdd37efd90))
-- support zeko ([4e9c1480](https://github.com/ymind/rsql/commit/4e9c14801d8aae977691964c5b0f493047395440))
-- support zeko ([4f099c40](https://github.com/ymind/rsql/commit/4f099c40a1d7e41bb13fd8830a5c4ec0e1ee1071))
-- support zeko ([61db05f6](https://github.com/ymind/rsql/commit/61db05f6c7b55e4dd6095875ed9b7dce687d90d3))
-- support zeko ([dff45c66](https://github.com/ymind/rsql/commit/dff45c666fa396980ecd3dba5a42317027ca5b68))
-- support zeko 22 ([16377b4c](https://github.com/ymind/rsql/commit/16377b4cef7b5992c99a34750e2922a1596244d5))
-- support zeko 22 ([02c42947](https://github.com/ymind/rsql/commit/02c4294761db3e8d9f70f3fbf0168c6effb8086c))
-- support zeko 22 ([a43b8d2a](https://github.com/ymind/rsql/commit/a43b8d2a1ad836d520d91cc5f006117aa0ab3873))
-- support zeko 22 ([20fa1eb9](https://github.com/ymind/rsql/commit/20fa1eb9663818aec199a4eb42db483a793d8a55))
-- support zeko 22 ([f0ed607d](https://github.com/ymind/rsql/commit/f0ed607de5e825ba7d731e90228c61a9b793a169))
-- support zeko 22 ([3736bfdb](https://github.com/ymind/rsql/commit/3736bfdb55f5669ae02d15ce1d965548bf475ddb))
-- support zeko 22 ([b4c84e8c](https://github.com/ymind/rsql/commit/b4c84e8cfdbf2052e6e8ae9e2d6cfe778b85d265))
-- support zeko 22 ([9718c9c7](https://github.com/ymind/rsql/commit/9718c9c7cd9e00fd6059aa662a78b2347a4c924b))
-- support zeko 22 ([00af314a](https://github.com/ymind/rsql/commit/00af314a89a94a748d77f7042be43ec4862e2c84))
-- support zeko 22 ([8a4fe382](https://github.com/ymind/rsql/commit/8a4fe3821c1b85fcefd93f6ce58b577e6e55b49f))
-- support zeko 22 ([7eab85a1](https://github.com/ymind/rsql/commit/7eab85a17c590d7325039d0de371f07958e982b1))
-- support zeko 22 ([2b167ecf](https://github.com/ymind/rsql/commit/2b167ecf83b5bb3d2144782b0f620f39c0997296))
-- support zeko 22 ([0f1c6367](https://github.com/ymind/rsql/commit/0f1c6367448aa0037f41dff2b177a17aa1915430))
-- support zeko 22 ([ff13d9bc](https://github.com/ymind/rsql/commit/ff13d9bce17fcbc06c6e0b713d5e5a758789ef9e))
-- support zeko 22 ([4f877244](https://github.com/ymind/rsql/commit/4f87724479fff1df76403771bc164ae5713fd400))
-- support zeko 22 ([60868c68](https://github.com/ymind/rsql/commit/60868c6850a719997ac2af49e801fed8ea9e9e0e))
-- support zeko 22 ([c2de6acf](https://github.com/ymind/rsql/commit/c2de6acf7b9833d39c51571d787bb26756d4ef21))
-- support zeko 22 ([d1cb4f09](https://github.com/ymind/rsql/commit/d1cb4f09d5e00646974b8128a00593622377828f))
-- support zeko 22 ([f9f98c99](https://github.com/ymind/rsql/commit/f9f98c99fd7fca0f5baa36444fbf0526ccccbbcb))
-- support zeko 22 ([9fcdb16c](https://github.com/ymind/rsql/commit/9fcdb16c5315a0ed37bfdcb96bb8513c56c0a4b9))
-- support zeko 22 ([a9630d75](https://github.com/ymind/rsql/commit/a9630d7553c6a16e207370e800a33756a655f4bd))
-- support zeko 22 ([e2456c8d](https://github.com/ymind/rsql/commit/e2456c8d530aa6b82d721afb14cabbc92c371214))
-- support zeko 22 ([b7c4dd1f](https://github.com/ymind/rsql/commit/b7c4dd1f4182b7e942900accd53a5d0971ef6f01))
-- support zeko 22 ([ece0ff26](https://github.com/ymind/rsql/commit/ece0ff261655cb4f8a7a6f1c73b6b87ee8bc0634))
-- support zeko 22 ([11d99668](https://github.com/ymind/rsql/commit/11d99668da8a9fea4e50ac0a659d4222b7d32de4))
-- support zeko 22 ([ff6f7bf8](https://github.com/ymind/rsql/commit/ff6f7bf89febd0c6c451ff85d95dfc229826b1c6))
-- support zeko 22 ([54f7ebc2](https://github.com/ymind/rsql/commit/54f7ebc2862c3e9fa9b959ad8959284160d98453))
-- support zeko 22 ([afef52e0](https://github.com/ymind/rsql/commit/afef52e0edfac3ac6d183d3298c59d5075b182e4))
-- support zeko 22 ([b961ef4d](https://github.com/ymind/rsql/commit/b961ef4d50e9f13c1a3da4c123f1bec5c1eadd96))
-- support zeko 22 ([8d24f838](https://github.com/ymind/rsql/commit/8d24f8387ce177486f03747c99ace98fceb7e4e0))
-- support zeko 22 ([b48fdf26](https://github.com/ymind/rsql/commit/b48fdf26ba428b2a700f99702d0a81e32ba77ac7))
-- support zeko 22 ([c9fd7b71](https://github.com/ymind/rsql/commit/c9fd7b71598dfe4f93cb7bf215da0090b08d7dc5))
-- support zeko 22 ([170ab696](https://github.com/ymind/rsql/commit/170ab69627a3e6f7377a75e6975966d63fa2808f))
-- support zeko 22 ([b3b05ea7](https://github.com/ymind/rsql/commit/b3b05ea7b44ba6edeab721cfe271aba3b4cdb613))
-- support zeko 22 ([18435dc5](https://github.com/ymind/rsql/commit/18435dc5b97b36d6fd3c0fb4838a5c0c341e7002))
-- support zeko 22 ([9961cbb5](https://github.com/ymind/rsql/commit/9961cbb5683e78a70c7b717b0cb8aa56c8c9f78f))
-- support zeko 22 ([db234c75](https://github.com/ymind/rsql/commit/db234c7579ee5a1f87ed93e6a73e24f0a77063cd))
-- support zeko 22 ([cdf57daa](https://github.com/ymind/rsql/commit/cdf57daa76569fefcbaf2c3e58a564aa6d8c9b91))
-- support zeko 22 ([73baf2f2](https://github.com/ymind/rsql/commit/73baf2f29fa6096e6914484ca9aeb7ac2b272bf5))
-- support zeko 22 ([47ff6750](https://github.com/ymind/rsql/commit/47ff6750b696243f60afaac16588a612ae52c4cb))
-- support jooq 33 ([e8cd5904](https://github.com/ymind/rsql/commit/e8cd5904c858ff7e4f4ec9727e370210a6a83f61))
-- support jooq 33 ([8cd7ec9c](https://github.com/ymind/rsql/commit/8cd7ec9c38e5db77a802c16496a675143a1c3984))
-- support jooq 33 ([d34fee16](https://github.com/ymind/rsql/commit/d34fee160391eb5c87356790032741fb7a54ee6d))
-- support jooq 33 ([e404b65e](https://github.com/ymind/rsql/commit/e404b65e6714615b6ce6d9e3744c7b2e434c62e7))
-- support jooq 33 ([8ee4173c](https://github.com/ymind/rsql/commit/8ee4173c5c0613b6a15f292f05f9f9757be4e59c))
-- support jooq 33 ([c105e5a6](https://github.com/ymind/rsql/commit/c105e5a65c0b15115ee455cd4199bd1434ac20c1))
-- support jooq 0.2.0-SNAPSHOT ([ff521e8c](https://github.com/ymind/rsql/commit/ff521e8cd4c48dc9ab0febc96151fcdf3c10d944))
-- support jooq 0.2.0-SNAPSHOT ([9b958e27](https://github.com/ymind/rsql/commit/9b958e27636cbf2b004b92483efad7c0d9bd73e6))
-- support jooq 0.3.0-SNAPSHOT ([bbb350bd](https://github.com/ymind/rsql/commit/bbb350bdb52e31a7d7af79faea85c0a85dad8723))
-- support jooq 0.75.0-SNAPSHOT ([f3f20e91](https://github.com/ymind/rsql/commit/f3f20e9110d6d62c0051bf7525382a0b80e5c0fc))
-- support jooq 0.75.0-SNAPSHOT ([911bac69](https://github.com/ymind/rsql/commit/911bac69681c0c39208208bcb6f2a43ffffd6cef))
-- 更新依赖包版本 ([f26ab4ca](https://github.com/ymind/rsql/commit/f26ab4ca3b84bda96e54166bed661125266f9de0))
-- support jooq 44 ([f3234dd7](https://github.com/ymind/rsql/commit/f3234dd7ead194ddf531db96c5b2b0e2f153a82b))
-- support jooq 44 ([c27ac4d0](https://github.com/ymind/rsql/commit/c27ac4d03938a104a2d9b9685e6463203acd04c0))
-- support jooq 0.80.0-SNAPSHOT ([1449c57b](https://github.com/ymind/rsql/commit/1449c57b870135e9d6a6ff4ae5636166cbdb4fff))
-- support jooq 0.80.0-SNAPSHOT ([bfb64dfb](https://github.com/ymind/rsql/commit/bfb64dfbe30110007f6f4cae46a711b88b5eb22e))
-- support jooq 0.80.0-SNAPSHOT ([a78ab089](https://github.com/ymind/rsql/commit/a78ab089380a632849fb57349053defbefd080df))
-- support jooq 0.80.0-SNAPSHOT ([0bed2a82](https://github.com/ymind/rsql/commit/0bed2a82a288b7d967b52843cee6f341e5eb903f))
-- support jooq 0.80.0-SNAPSHOT ([4d3c969e](https://github.com/ymind/rsql/commit/4d3c969eac57688b8d3cc754bdfc4a0722761c24))
-- support jooq 0.80.0-SNAPSHOT ([b136337a](https://github.com/ymind/rsql/commit/b136337a9a1310e5c65e5f49e4779ac3a8c14f84))
-- support jooq 0.84.0-SNAPSHOT ([1a2a64bd](https://github.com/ymind/rsql/commit/1a2a64bd1a2c2de0a91c9b565e3278daed81a333))
-- support jooq 0.84.0-SNAPSHOT ([0a0ef0be](https://github.com/ymind/rsql/commit/0a0ef0be0b089358a84967e493594303b822aa54))
-- support jooq 0.84.0-SNAPSHOT ([940665c0](https://github.com/ymind/rsql/commit/940665c0b785806eca448ce19347afa761c61299))
+- 添加表达式节点校验器支持 ([80d77118](https://github.com/ymind/rsql/commit/80d77118f68903939ee3f83db6abc1a7b8ade1de))
+- 重构 Operator ([5e45f8dc](https://github.com/ymind/rsql/commit/5e45f8dcc42c6a5554aecd56723068aad49601f3))
+- 转换器支持预判 ([61697260](https://github.com/ymind/rsql/commit/616972603fd354c1ce19fb347702107ffe8e1ba7))
+
+
+### Code Refactoring
+
+- 优化 transformer 及其注册机制 ([7fc51dfb](https://github.com/ymind/rsql/commit/7fc51dfb01d1821d2ea38cc75146444db4305b22))
+
 
 ### Chores
 
-- **deps**: bumped package versions ([603832a9](https://github.com/ymind/rsql/commit/603832a9ef57f790a5a7cfcd73e74b2a10fda11e))
+- **deps**: 更新依赖包版本 ([dcc7aee8](https://github.com/ymind/rsql/commit/dcc7aee8ccac5db31b57f56dcf5ef73c3045b842))
 
-### Build System
 
-- **gradle**: bumped gradle version to 7.5 ([fc7fcb54](https://github.com/ymind/rsql/commit/fc7fcb54e0c2e07ac8f79a0f87e1cc6fd7bda350))
+## 0.89.0-SNAPSHOT (2024-05-07)
+
+### Features
+
+- **mybatis-flex**: 添加 mybatis-flex 方案 ([e0ccfe08](https://github.com/ymind/rsql/commit/e0ccfe08237f1c220307b8297f9c39e3e6fc7151))
+
+
+### Chores
+
+- **deps**: 更新依赖包版本 ([2a9746da](https://github.com/ymind/rsql/commit/2a9746dab8db93dcda810931ed4d126fc3b4f00b))
 
