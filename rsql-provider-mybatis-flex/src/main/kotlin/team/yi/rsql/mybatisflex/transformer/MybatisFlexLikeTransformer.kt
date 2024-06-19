@@ -17,7 +17,7 @@ class MybatisFlexLikeTransformer(private val useRawValue: Boolean) : MybatisFlex
 class MybatisFlexLikeIgnoreCaseTransformer(private val useRawValue: Boolean) : MybatisFlexRsqlTransformer(Operator.LIKE_IGNORE_CASE) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryCondition> {
         val field = QueryMethods.upper(RawQueryColumn(selector))
-        val value1 = QueryMethods.upper(arguments[0].sqlEscape())
+        val value1 = QueryMethods.upper(QueryMethods.string(arguments[0].sqlEscape()))
         val queryBlock = field.likeRaw(value1)
 
         return RsqlQueryPart(selector, arguments, queryBlock, useRawValue, value1)
@@ -47,7 +47,7 @@ class MybatisFlexStartsWithTransformer(private val useRawValue: Boolean) : Mybat
 class MybatisFlexStartsWithIgnoreCaseTransformer(private val useRawValue: Boolean) : MybatisFlexRsqlTransformer(Operator.STARTS_WITH_IGNORE_CASE) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryCondition> {
         val field = QueryMethods.upper(RawQueryColumn(selector))
-        val value1 = QueryMethods.upper(arguments[0].sqlEscape())
+        val value1 = QueryMethods.upper(QueryMethods.string(arguments[0].sqlEscape()))
         val queryBlock = field.likeLeft(value1)
 
         return RsqlQueryPart(selector, arguments, queryBlock, useRawValue, value1)
@@ -67,7 +67,7 @@ class MybatisFlexEndsWithTransformer(private val useRawValue: Boolean) : Mybatis
 class MybatisFlexEndsWithIgnoreCaseTransformer(private val useRawValue: Boolean) : MybatisFlexRsqlTransformer(Operator.ENDS_WITH_IGNORE_CASE) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryCondition> {
         val field = QueryMethods.upper(RawQueryColumn(selector))
-        val value1 = QueryMethods.upper(arguments[0].sqlEscape())
+        val value1 = QueryMethods.upper(QueryMethods.string(arguments[0].sqlEscape()))
         val queryBlock = field.likeRight(value1)
 
         return RsqlQueryPart(selector, arguments, queryBlock, useRawValue, value1)
@@ -87,7 +87,7 @@ class MybatisFlexContainsTransformer(private val useRawValue: Boolean) : Mybatis
 class MybatisFlexContainsIgnoreCaseTransformer(private val useRawValue: Boolean) : MybatisFlexRsqlTransformer(Operator.CONTAINS_IGNORE_CASE) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryCondition> {
         val field = QueryMethods.upper(RawQueryColumn(selector))
-        val value1 = QueryMethods.upper(arguments[0].sqlEscape())
+        val value1 = QueryMethods.upper(QueryMethods.string(arguments[0].sqlEscape()))
         val queryBlock = field.like(value1)
 
         return RsqlQueryPart(selector, arguments, queryBlock, useRawValue, value1)

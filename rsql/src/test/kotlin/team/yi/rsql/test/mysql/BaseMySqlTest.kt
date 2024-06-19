@@ -1,7 +1,7 @@
 package team.yi.rsql.test.mysql
 
 import com.zaxxer.hikari.HikariConfig
-import org.junit.jupiter.api.*
+import org.junit.jupiter.api.BeforeAll
 import org.testcontainers.containers.MySQLContainer
 import org.testcontainers.junit.jupiter.Container
 import team.yi.rsql.test.BaseTest
@@ -29,10 +29,10 @@ abstract class BaseMySqlTest : BaseTest() {
         super.init()
     }
 
-    @AfterAll
-    override fun destroy() {
-        super.destroy()
-
-        mysqlContainer.stop()
-    }
+    // @AfterAll
+    // override fun destroy() {
+    //     super.destroy()
+    //
+    //     mysqlContainer.stop()
+    // }
 }

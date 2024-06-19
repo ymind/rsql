@@ -89,12 +89,15 @@ class RsqlMybatisflexTest : BaseMySqlTest() {
                     e.SALARY>='10'
                     and e.NAME=isNotNull=1
                     and (
-                        e.MANAGER_ID=isNull=1 or e.DEPARTMENT_ID=out=(1151, 1152)
+                        (e.MANAGER_ID=isNull=1 or e.DEPARTMENT_ID@num=out=(1151, 1152))
                         and (
                             d.NAME!='else' or e.JOB=in=(assistant,director,trainee,engineer)
                         )
                     )
-                    and e.HIRE_DATE=before='2019-01-01'
+                    and (
+                        e.HIRE_DATE=between=('2000-01-01', '2099-12-31')
+                        or e.DEPARTMENT_ID@num=between=(100, 99999)
+                    )
                 """.trimIndent().replace("\n", " ")
             this.orderBy = listOf("d.ID asc", "e.SALARY desc")
             this.limit = 10

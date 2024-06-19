@@ -7,7 +7,7 @@ import team.yi.rsql.mybatisflex.*
 class MybatisFlexRegexpTransformer : MybatisFlexRsqlTransformer(Operator.REGEX) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryCondition> {
         val field = RawQueryColumn(selector)
-        val value1 = MybatisFlexRsqlUtil.toValue(arguments[0], typePrompt)
+        val value1 = toQueryColumn(arguments[0], typePrompt)
         val queryBlock = field.likeRegex(value1)
 
         return RsqlQueryPart(selector, arguments, queryBlock, true, value1)

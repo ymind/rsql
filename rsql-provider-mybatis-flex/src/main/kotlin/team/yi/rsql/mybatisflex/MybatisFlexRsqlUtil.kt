@@ -4,29 +4,32 @@ import com.mybatisflex.core.query.*
 import team.yi.rsql.*
 import java.text.NumberFormat
 
-object MybatisFlexRsqlUtil {
-    private val numberFormat = NumberFormat.getInstance()
+private val numberFormat = NumberFormat.getInstance()
 
-    fun toValue(argument: String, typePrompt: String?, quote: Boolean = false): Any {
-        val quoted = argument.sqlEscape().let {
-            if (quote) {
-                "'$argument'"
-            } else {
-                argument
-            }
-        }
+fun String.toNumber(): Number {
+    return numberFormat.parse(this)
+}
 
-        return when (typePrompt) {
-            RsqlConstants.TYPE_PROMPT_RAW -> RawQueryColumn(quoted)
-            RsqlConstants.TYPE_PROMPT_NUMBER -> toNumber(argument)
-            RsqlConstants.TYPE_PROMPT_BOOLEAN -> argument.toBoolean()
-            // RsqlConstants.TYPE_PROMPT_DATE, RsqlConstants.TYPE_PROMPT_TIME, RsqlConstants.TYPE_PROMPT_DATETIME -> RawQueryColumn(quoted)
-            else -> RawQueryColumn(quoted)
+fun convertType(argument: String, typePrompt: String?): Any {
+    return when (typePrompt) {
+        RsqlConstants.TYPE_PROMPT_NUMBER -> argument.toNumber()
+        RsqlConstants.TYPE_PROMPT_BOOLEAN -> argument.toBoolean()
+        else -> argument.sqlEscape()
+    }
+}
+
+fun toQueryColumn(argument: String, typePrompt: String?, quote: Boolean = false): RawQueryColumn {
+    val quoted = argument.sqlEscape().let {
+        if (quote) {
+            "'$argument'"
+        } else {
+            argument
         }
     }
 
-    fun toNumber(argument: String): Number {
-        return numberFormat.parse(argument)
+    return when (typePrompt) {
+        RsqlConstants.TYPE_PROMPT_NUMBER, RsqlConstants.TYPE_PROMPT_BOOLEAN -> RawQueryColumn(argument)
+        else -> RawQueryColumn(quoted)
     }
 }
 

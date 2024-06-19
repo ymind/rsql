@@ -27,4 +27,14 @@ object RsqlUtil {
     }
 }
 
+val TRUE_VALUES = arrayOf("true", "yes", "y", "t", "ok", "on", "1", "１", "是", "对", "真", "對", "√")
+
+fun String?.toBoolean(defaultValue: Boolean = false, ignoreCase: Boolean = true): Boolean {
+    return when {
+        this == null -> defaultValue
+        ignoreCase -> TRUE_VALUES.contains(this.lowercase())
+        else -> TRUE_VALUES.contains(this)
+    }
+}
+
 fun String.sqlEscape(): String = this.replace("'", "''")
