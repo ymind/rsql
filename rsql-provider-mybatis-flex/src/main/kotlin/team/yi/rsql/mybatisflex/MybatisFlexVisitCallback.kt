@@ -18,10 +18,11 @@ class MybatisFlexVisitCallback(
         val left = predicate.value
         val right = subPredicate.value
 
+        val condition = QueryCondition.createEmpty().and(left)
         val queryBlock = if (logicalType == LogicalType.OR) {
-            left.or(right)
+            condition.or(right)
         } else {
-            left.and(right)
+            condition.and(right)
         }
 
         return RsqlLogicalExpression(logicalType, queryBlock)
