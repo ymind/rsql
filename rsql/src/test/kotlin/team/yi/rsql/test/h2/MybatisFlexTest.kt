@@ -25,6 +25,20 @@ class MybatisFlexTest : H2BaseTest() {
             this.orderBy = listOf("COUNT(*) DESC")
         }
 
+        // val c1 = RawQueryColumn("id1").eq(1)
+        // val c2 = RawQueryColumn("id2").eq(2)
+        // val c3 = RawQueryColumn("id3").eq(3)
+        //
+        // val c4 = RawQueryColumn("title").eq("xxxx")
+        //
+        // val d1 = QueryCondition.createEmpty().and(c1).or(c2).or(c3)
+        // val d3 = QueryCondition.createEmpty().and(d1).and(c4)
+        // // SELECT * FROM `oooooo` WHERE title = 'xxxx' AND (id1 = 1 OR id2 = 2 OR id3 = 3)
+        // val q = QueryWrapper.create()
+        //     .from("oooooo")
+        //     .where(d3)
+        //     .toSQL()
+
         val queryWrapper = QueryWrapper.create()
         val rsql = Rsql.myBatisFlex(queryWrapper)
         val rsqlQuery = rsql.build(rsqlInput)

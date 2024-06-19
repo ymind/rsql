@@ -15,7 +15,7 @@ dependencies {
     // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-bom
     api(platform("org.apache.logging.log4j:log4j-bom:3.0.0-beta2"))
     // https://mvnrepository.com/artifact/org.jooq/jooq-parent
-    api(platform("org.jooq:jooq-parent:3.19.9"))
+    api(platform("org.jooq:jooq-parent:3.19.10"))
     // https://mvnrepository.com/artifact/com.mybatis-flex/mybatis-flex-dependencies
     api(platform("com.mybatis-flex:mybatis-flex-dependencies:1.9.2"))
 
@@ -26,7 +26,7 @@ dependencies {
         // https://mvnrepository.com/artifact/io.github.nstdio/rsql-parser
         api("io.github.nstdio:rsql-parser:2.3.2")
         // https://mvnrepository.com/artifact/io.github.oshai/kotlin-logging-jvm
-        api("io.github.oshai:kotlin-logging-jvm:6.0.9")
+        api("io.github.oshai:kotlin-logging-jvm:7.0.0")
         // https://mvnrepository.com/artifact/io.zeko/zeko-sql-builder
         api("io.zeko:zeko-sql-builder:1.5.6")
         // https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-jdk8
