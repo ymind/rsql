@@ -69,7 +69,7 @@ class MybatisFlexNotBetweenTransformer(private val useRawValue: Boolean) : Mybat
 class MybatisFlexBeforeTransformer : MybatisFlexRsqlTransformer(Operator.BEFORE) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryCondition> {
         val field = RawQueryColumn(selector)
-        val value1 = toQueryColumn(arguments[0], typePrompt, true)
+        val value1 = toQueryColumn(arguments[0], typePrompt)
         val queryBlock = field.lt(value1)
 
         return RsqlQueryPart(selector, arguments, queryBlock, true, value1)
@@ -79,7 +79,7 @@ class MybatisFlexBeforeTransformer : MybatisFlexRsqlTransformer(Operator.BEFORE)
 class MybatisFlexAfterTransformer : MybatisFlexRsqlTransformer(Operator.AFTER) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryCondition> {
         val field = RawQueryColumn(selector)
-        val value1 = toQueryColumn(arguments[0], typePrompt, true)
+        val value1 = toQueryColumn(arguments[0], typePrompt)
         val queryBlock = field.gt(value1)
 
         return RsqlQueryPart(selector, arguments, queryBlock, true, value1)

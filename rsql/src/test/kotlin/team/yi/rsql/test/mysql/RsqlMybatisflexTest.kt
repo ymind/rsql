@@ -96,6 +96,7 @@ class RsqlMybatisflexTest : BaseMySqlTest() {
                     )
                     and (
                         e.HIRE_DATE=between=('2000-01-01', '2099-12-31')
+                        or e.HIRE_DATE=le='2099-12-31'
                         or e.DEPARTMENT_ID@num=between=(100, 99999)
                     )
                 """.trimIndent().replace("\n", " ")

@@ -1,5 +1,19 @@
 # 更新日志
 
+## 0.92.4-SNAPSHOT (2024-07-08)
+
+### Bug Fixes
+
+- 修复带有嵌套的复杂表达式逻辑合并问题 ([41a1dd42](https://github.com/ymind/rsql/commit/41a1dd4236ba0123979d96cff16c3deadc999dd4))
+- 修复 in、between 操作中的数据类型隐患 ([39bfa331](https://github.com/ymind/rsql/commit/39bfa331ace50be1f7d7b27edf4915e624cda2fd))
+
+
+### Performance Improvements
+
+- 提升单元测试稳定性 ([8bc9b80f](https://github.com/ymind/rsql/commit/8bc9b80f2061e2c14466826f9cb8be48875c4d77))
+- 优化值类型转换 ([5ee7363c](https://github.com/ymind/rsql/commit/5ee7363c370713fb610d3654126cd05898f21de6))
+
+
 ## 0.92.0-SNAPSHOT (2024-06-07)
 
 ### Features

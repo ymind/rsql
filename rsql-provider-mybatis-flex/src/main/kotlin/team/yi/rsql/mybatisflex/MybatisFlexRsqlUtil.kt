@@ -2,6 +2,7 @@ package team.yi.rsql.mybatisflex
 
 import com.mybatisflex.core.query.*
 import team.yi.rsql.*
+import team.yi.rsql.tools.KmDateUtil
 import java.text.NumberFormat
 
 private val numberFormat = NumberFormat.getInstance()
@@ -10,22 +11,21 @@ fun String.toNumber(): Number {
     return numberFormat.parse(this)
 }
 
-fun convertType(argument: String, typePrompt: String?): Any {
+fun convertType(argument: String, typePrompt: String?): Any? {
     return when (typePrompt) {
         RsqlConstants.TYPE_PROMPT_NUMBER -> argument.toNumber()
         RsqlConstants.TYPE_PROMPT_BOOLEAN -> argument.toBoolean()
+        RsqlConstants.TYPE_PROMPT_DATE -> KmDateUtil.parse(argument)
+        RsqlConstants.TYPE_PROMPT_DATETIME -> KmDateUtil.parse(argument)
+        RsqlConstants.TYPE_PROMPT_OFFSET_DATE -> KmDateUtil.parseOffsetDateTime(argument)
+        RsqlConstants.TYPE_PROMPT_OFFSET_DATETIME -> KmDateUtil.parseOffsetDateTime(argument)
+
         else -> argument.sqlEscape()
     }
 }
 
-fun toQueryColumn(argument: String, typePrompt: String?, quote: Boolean = false): RawQueryColumn {
-    val quoted = argument.sqlEscape().let {
-        if (quote) {
-            "'$argument'"
-        } else {
-            argument
-        }
-    }
+fun toQueryColumn(argument: String, typePrompt: String?): RawQueryColumn {
+    val quoted = argument.sqlEscape().let { "'$argument'" }
 
     return when (typePrompt) {
         RsqlConstants.TYPE_PROMPT_NUMBER, RsqlConstants.TYPE_PROMPT_BOOLEAN -> RawQueryColumn(argument)

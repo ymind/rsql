@@ -8,7 +8,7 @@ import team.yi.rsql.sqlEscape
 class MybatisFlexEqualsTransformer : MybatisFlexRsqlTransformer(Operator.EQUALS) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryCondition> {
         val field = RawQueryColumn(selector)
-        val value1 = toQueryColumn(arguments[0], typePrompt, true)
+        val value1 = toQueryColumn(arguments[0], typePrompt)
         val queryPart = field.eq(value1)
 
         return RsqlQueryPart(selector, arguments, queryPart, true, value1)
@@ -18,7 +18,7 @@ class MybatisFlexEqualsTransformer : MybatisFlexRsqlTransformer(Operator.EQUALS)
 class MybatisFlexNotEqualsTransformer : MybatisFlexRsqlTransformer(Operator.NOT_EQUALS) {
     override fun transform(selector: String, arguments: List<String>, typePrompt: String?): RsqlQueryPart<QueryCondition> {
         val field = RawQueryColumn(selector)
-        val value1 = toQueryColumn(arguments[0], typePrompt, true)
+        val value1 = toQueryColumn(arguments[0], typePrompt)
         val queryPart = field.ne(value1)
 
         return RsqlQueryPart(selector, arguments, queryPart, true, value1)
