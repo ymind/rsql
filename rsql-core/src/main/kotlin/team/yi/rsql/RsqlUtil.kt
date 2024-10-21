@@ -2,6 +2,7 @@ package team.yi.rsql
 
 import cz.jirutka.rsql.parser.ast.ComparisonOperator
 import team.yi.rsql.core.*
+import team.yi.rsql.exception.RsqlException
 
 object RsqlUtil {
     fun getOperators(customOperators: Collection<RsqlOperator>? = null): Set<ComparisonOperator> {
@@ -18,7 +19,7 @@ object RsqlUtil {
                 runCatching {
                     ComparisonOperator(it, operator.arity)
                 }.onFailure { ex ->
-                    throw IllegalArgumentException("Invalid operator symbol: '$it' Operator ${ex.message}", ex)
+                    throw RsqlException("Invalid operator symbol: '$it' Operator ${ex.message}", ex)
                 }.getOrThrow()
             }
         }

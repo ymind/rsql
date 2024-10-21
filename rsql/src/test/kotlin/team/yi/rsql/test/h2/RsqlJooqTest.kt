@@ -46,6 +46,7 @@ class RsqlJooqTest : H2BaseTest() {
         }
     }
 
+    @Suppress("UnstableApiUsage")
     @Test
     fun `normal query`() {
         val fields = listOf(

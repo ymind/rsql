@@ -6,7 +6,7 @@ import team.yi.rsql.mybatisflex.transformer.*
 import team.yi.rsql.mybatisflex.transformer.aggregations.*
 
 class MybatisFlexRsqlConfig(
-    val useRawValue: Boolean = true,
+    useRawValue: Boolean = true,
 ) : RsqlConfig<QueryCondition>() {
     init {
         register(MybatisFlexIsNullTransformer())

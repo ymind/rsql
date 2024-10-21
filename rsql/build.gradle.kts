@@ -11,18 +11,17 @@ dependencies {
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8")
 
     // https://mvnrepository.com/artifact/team.yi.jacksync/jacksync
-    testImplementation("team.yi.jacksync:jacksync:0.8.16")
+    testImplementation("team.yi.jacksync:jacksync:0.8.24")
 
     // https://mvnrepository.com/artifact/org.dromara.hutool/hutool-all
-    testImplementation("org.dromara.hutool:hutool-all:6.0.0-M13")
+    testImplementation("org.dromara.hutool:hutool-all:6.0.0-M19")
 
-    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
     testImplementation("com.fasterxml.jackson.core:jackson-databind")
 
     // https://mvnrepository.com/artifact/org.testcontainers/mysql
-    testImplementation("org.testcontainers:mysql:1.19.8")
-    testImplementation("org.testcontainers:junit-jupiter:1.19.8")
+    testImplementation("org.testcontainers:mysql:1.20.4")
+    testImplementation("org.testcontainers:junit-jupiter:1.20.4")
 
     // https://mvnrepository.com/artifact/com.mysql/mysql-connector-j
-    testImplementation("com.mysql:mysql-connector-j:8.4.0")
+    testImplementation("com.mysql:mysql-connector-j:9.1.0")
 }

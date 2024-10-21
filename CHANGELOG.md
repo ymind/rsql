@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.92.4-SNAPSHOT (2024-07-08)
+## 0.92.6-SNAPSHOT (2024-11-07)
 
 ### Bug Fixes
 
@@ -11,7 +11,13 @@
 ### Performance Improvements
 
 - 提升单元测试稳定性 ([8bc9b80f](https://github.com/ymind/rsql/commit/8bc9b80f2061e2c14466826f9cb8be48875c4d77))
-- 优化值类型转换 ([5ee7363c](https://github.com/ymind/rsql/commit/5ee7363c370713fb610d3654126cd05898f21de6))
+- 优化值类型转换 ([bf71e6e0](https://github.com/ymind/rsql/commit/bf71e6e03d1c7859a345db3a3a8d85695782dfc4))
+
+
+### Chores
+
+- **deps**: 更新依赖包版本 ([e8b8e171](https://github.com/ymind/rsql/commit/e8b8e17196060881f1c210529983dade25fe5432))
+- 升级 Gradle、Kotlin 及相关依赖版本 ([d7ad7c58](https://github.com/ymind/rsql/commit/d7ad7c58d501bd52ed1f89f9dd75f6aaa654ce3b))
 
 
 ## 0.92.0-SNAPSHOT (2024-06-07)

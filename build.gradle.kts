@@ -1,11 +1,11 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import team.yi.gradle.plugin.FileSet
 
 object Constants {
-    const val gitUrl = "github.com"
-    const val gitProjectUrl = "ymind/rsql"
+    const val GIT_URL = "github.com"
+    const val GIT_PROJECT_URL = "ymind/rsql"
 
-    const val projectVersion = "0.92.4-SNAPSHOT"
+    const val PROJECT_VERSION = "0.92.6-SNAPSHOT"
 }
 
 plugins {
@@ -18,17 +18,12 @@ plugins {
     // https://plugins.gradle.org/plugin/team.yi.semantic-gitlog
     id("team.yi.semantic-gitlog") version "0.6.12"
 
-    // https://plugins.gradle.org/plugin/se.patrikerdes.use-latest-versions
-    id("se.patrikerdes.use-latest-versions") version "0.2.18"
-    // https://plugins.gradle.org/plugin/com.github.ben-manes.versions
-    id("com.github.ben-manes.versions") version "0.51.0"
-
     // https://plugins.gradle.org/plugin/io.gitlab.arturbosch.detekt
-    id("io.gitlab.arturbosch.detekt") version "1.23.6"
+    id("io.gitlab.arturbosch.detekt") version "1.23.7"
 }
 
 group = "team.yi.rsql"
-version = Constants.projectVersion
+version = Constants.PROJECT_VERSION
 description = "Integration RSQL query language and Querydsl framework."
 
 subprojects {
@@ -68,18 +63,20 @@ subprojects {
         }
     }
 
-    tasks {
-        val kotlinSettings: KotlinCompile.() -> Unit = {
-            kotlinOptions.apiVersion = "1.9"
-            kotlinOptions.languageVersion = "1.9"
-            kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
-            kotlinOptions.freeCompilerArgs += listOf(
-                "-Xjsr305=strict"
+    kotlin {
+        compilerOptions {
+            apiVersion.set(org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_0)
+            jvmTarget = JvmTarget.JVM_17
+
+            freeCompilerArgs.addAll(
+                "-Xjsr305=strict",
+                "-Xjvm-default=all",
+                "-opt-in=kotlin.RequiresOptIn",
             )
         }
+    }
 
-        compileKotlin(kotlinSettings)
-        compileTestKotlin(kotlinSettings)
+    tasks {
         compileJava { options.encoding = "UTF-8" }
         compileTestJava { options.encoding = "UTF-8" }
         javadoc { options.encoding = "UTF-8" }
@@ -90,8 +87,6 @@ subprojects {
 }
 
 allprojects {
-    apply(plugin = "com.github.ben-manes.versions")
-    apply(plugin = "se.patrikerdes.use-latest-versions")
     apply(plugin = "io.gitlab.arturbosch.detekt")
 
     detekt {
@@ -137,13 +132,13 @@ allprojects {
                     group = rootProject.group
                     name.set(project.name)
                     description.set(project.description)
-                    url.set("https://${Constants.gitUrl}/${Constants.gitProjectUrl}")
+                    url.set("https://${Constants.GIT_URL}/${Constants.GIT_PROJECT_URL}")
                     inceptionYear.set("2020")
 
                     scm {
-                        url.set("https://${Constants.gitUrl}/${Constants.gitProjectUrl}")
-                        connection.set("scm:git:git@${Constants.gitUrl}:${Constants.gitProjectUrl}.git")
-                        developerConnection.set("scm:git:git@${Constants.gitUrl}:${Constants.gitProjectUrl}.git")
+                        url.set("https://${Constants.GIT_URL}/${Constants.GIT_PROJECT_URL}")
+                        connection.set("scm:git:git@${Constants.GIT_URL}:${Constants.GIT_PROJECT_URL}.git")
+                        developerConnection.set("scm:git:git@${Constants.GIT_URL}:${Constants.GIT_PROJECT_URL}.git")
                     }
 
                     licenses {
@@ -171,12 +166,12 @@ allprojects {
 
                     issueManagement {
                         system.set("GitHub")
-                        url.set("https://${Constants.gitUrl}/${Constants.gitProjectUrl}/issues")
+                        url.set("https://${Constants.GIT_URL}/${Constants.GIT_PROJECT_URL}/issues")
                     }
 
                     ciManagement {
                         system.set("GitHub")
-                        url.set("https://${Constants.gitUrl}/${Constants.gitProjectUrl}/actions")
+                        url.set("https://${Constants.GIT_URL}/${Constants.GIT_PROJECT_URL}/actions")
                     }
                 }
             }
@@ -209,7 +204,7 @@ allprojects {
 }
 
 tasks {
-    val gitlogFileSets = setOf(
+    val logFileSets = setOf(
         FileSet(
             file("${rootProject.rootDir}/config/gitlog/CHANGELOG.md.mustache"),
             file("${rootProject.rootDir}/CHANGELOG.md")
@@ -219,7 +214,7 @@ tasks {
             file("${rootProject.rootDir}/CHANGELOG_zh-cn.md")
         )
     )
-    val gitlogLocaleProfiles = mapOf(
+    val logLocaleProfiles = mapOf(
         "zh-cn" to file("${rootProject.rootDir}/config/gitlog/commit-locales_zh-cn.md")
     )
 
@@ -229,12 +224,12 @@ tasks {
         toRef = "main"
         preRelease = "SNAPSHOT"
 
-        issueUrlTemplate = "https://${Constants.gitUrl}/${Constants.gitProjectUrl}/issues/:issueId"
-        commitUrlTemplate = "https://${Constants.gitUrl}/${Constants.gitProjectUrl}/commit/:commitId"
-        mentionUrlTemplate = "https://${Constants.gitUrl}/:username"
+        issueUrlTemplate = "https://${Constants.GIT_URL}/${Constants.GIT_PROJECT_URL}/issues/:issueId"
+        commitUrlTemplate = "https://${Constants.GIT_URL}/${Constants.GIT_PROJECT_URL}/commit/:commitId"
+        mentionUrlTemplate = "https://${Constants.GIT_URL}/:username"
         // jsonFile = file("${rootProject.rootDir}/CHANGELOG.json")
-        fileSets = gitlogFileSets
-        commitLocales = gitlogLocaleProfiles
+        fileSets = logFileSets
+        commitLocales = logLocaleProfiles
 
         outputs.upToDateWhen { false }
     }
@@ -245,7 +240,7 @@ tasks {
         toRef = "main"
         derivedVersionMark = "NEXT_VERSION:=="
         preRelease = "SNAPSHOT"
-        commitLocales = gitlogLocaleProfiles
+        commitLocales = logLocaleProfiles
 
         outputs.upToDateWhen { false }
     }
