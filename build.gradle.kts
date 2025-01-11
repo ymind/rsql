@@ -5,7 +5,7 @@ object Constants {
     const val GIT_URL = "github.com"
     const val GIT_PROJECT_URL = "ymind/rsql"
 
-    const val PROJECT_VERSION = "0.92.6-SNAPSHOT"
+    const val PROJECT_VERSION = "0.93.0-SNAPSHOT"
 }
 
 plugins {
@@ -270,7 +270,7 @@ tasks.register("bumpVersion") {
             logger.info("Set Project to new Version $it")
 
             val contents = buildFile.readText()
-                .replaceFirst("const val projectVersion = \"$version\"", "const val projectVersion = \"$it\"")
+                .replaceFirst("const val PROJECT_VERSION = = \"$version\"", "const val PROJECT_VERSION = = \"$it\"")
 
             buildFile.writeText(contents)
         }
